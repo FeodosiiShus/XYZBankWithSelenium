@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bank.xyzbank.login.LoginPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-27T14:40:14" hostname="DESKTOP-0LK3DIQ" time="6.176">
+  <properties/>
+  <testcase name="loginWithChooseName()" classname="com.bank.xyzbank.login.LoginPageTest" time="6.176"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Starting ChromeDriver 92.0.4515.107 (87a818b10553a07434ea9e2b6dccf3cbe7895134-refs/branch-heads/4515@{#1634}) on port 34679
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+авг. 27, 2021 5:40:17 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+]]></system-err>
+</testsuite>

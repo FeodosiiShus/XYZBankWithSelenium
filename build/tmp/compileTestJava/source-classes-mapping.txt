@@ -1,6 +1,10 @@
 com/bank/xyzbank/Page.java
  com.bank.xyzbank.Page
-com/bank/xyzbank/MainPageTest.java
- com.bank.xyzbank.MainPageTest
-com/bank/xyzbank/MainPage.java
- com.bank.xyzbank.MainPage
+com/bank/xyzbank/login/LoginPage.java
+ com.bank.xyzbank.login.LoginPage
+com/bank/xyzbank/main/MainPage.java
+ com.bank.xyzbank.main.MainPage
+com/bank/xyzbank/main/MainPageTest.java
+ com.bank.xyzbank.main.MainPageTest
+com/bank/xyzbank/login/LoginPageTest.java
+ com.bank.xyzbank.login.LoginPageTest

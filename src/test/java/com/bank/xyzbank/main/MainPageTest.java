@@ -1,4 +1,4 @@
-package com.bank.xyzbank;
+package com.bank.xyzbank.main;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,11 +31,6 @@ public class MainPageTest {
 
     @AfterEach
     public void closeDriver() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         driver.quit();
     }
 }
