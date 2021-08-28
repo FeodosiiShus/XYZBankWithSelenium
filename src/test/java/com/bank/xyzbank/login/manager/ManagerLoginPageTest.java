@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
@@ -24,8 +26,8 @@ class ManagerLoginPageTest {
     @Test
     public void openManagerLoginPage(){
         var managerLoginPage = new ManagerLoginPage(webDriver);
-        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-        managerLoginPage.openManagerLoginPage();
+        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+        assertTrue(managerLoginPage.checkManagerLoginPage());
     }
 
     @AfterEach

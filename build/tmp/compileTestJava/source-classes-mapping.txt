@@ -1,14 +1,14 @@
 com/bank/xyzbank/Page.java
  com.bank.xyzbank.Page
-com/bank/xyzbank/login/manager/ManagerLoginPage.java
- com.bank.xyzbank.login.manager.ManagerLoginPage
-com/bank/xyzbank/login/manager/ManagerLoginPageTest.java
- com.bank.xyzbank.login.manager.ManagerLoginPageTest
 com/bank/xyzbank/main/MainPageTest.java
  com.bank.xyzbank.main.MainPageTest
-com/bank/xyzbank/login/customer/LoginPage.java
- com.bank.xyzbank.login.customer.LoginPage
-com/bank/xyzbank/main/MainPage.java
- com.bank.xyzbank.main.MainPage
 com/bank/xyzbank/login/customer/LoginPageTest.java
  com.bank.xyzbank.login.customer.LoginPageTest
+com/bank/xyzbank/login/customer/LoginPage.java
+ com.bank.xyzbank.login.customer.LoginPage
+com/bank/xyzbank/login/manager/ManagerLoginPage.java
+ com.bank.xyzbank.login.manager.ManagerLoginPage
+com/bank/xyzbank/main/MainPage.java
+ com.bank.xyzbank.main.MainPage
+com/bank/xyzbank/login/manager/ManagerLoginPageTest.java
+ com.bank.xyzbank.login.manager.ManagerLoginPageTest

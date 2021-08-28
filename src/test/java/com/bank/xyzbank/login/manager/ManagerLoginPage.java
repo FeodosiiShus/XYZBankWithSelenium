@@ -17,14 +17,18 @@ public class ManagerLoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "button[ng-click='manager()']")
-    private WebElement managerLoginButton;
+    @FindBy(css = "button[ng-class='btnClass1']")
+    private WebElement buttonAddCustomer;
 
-    @FindAll(@FindBy(css = "center"))
-    List<WebElement> listOfButtons;
+    @FindBy(css = "button[ng-class='btnClass2']")
+    private WebElement buttonOpenAccount;
 
-    public void openManagerLoginPage() {
-        managerLoginButton.click();
+    @FindBy(css = "button[ng-class='btnClass3']")
+    private WebElement buttonCustomers;
+
+
+    public boolean checkManagerLoginPage() {
+        return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
     }
 
 }

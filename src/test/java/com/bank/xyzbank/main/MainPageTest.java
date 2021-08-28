@@ -25,7 +25,7 @@ public class MainPageTest {
     public void mainPageOpen() throws InterruptedException {
         var mainPage = new MainPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-        assertTrue(mainPage.checkMainPage());//TODO: delete assertion
+        assertTrue(mainPage.checkMainPage());
         mainPage.clickOnCustomerLoginPage();
         mainPage.clickOnManagerLoginPage();
     }

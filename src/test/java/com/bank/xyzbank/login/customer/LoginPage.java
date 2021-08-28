@@ -1,6 +1,5 @@
 package com.bank.xyzbank.login.customer;
 
-import com.bank.xyzbank.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -39,7 +38,7 @@ public class LoginPage {
 
     }
 
-    public boolean checkLoginButtonIsDisplayed(){
+    public boolean checkLoginButtonIsDisplayed() {
         return loginButton.isDisplayed();
     }
 

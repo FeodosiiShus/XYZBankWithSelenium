@@ -26,12 +26,12 @@ public class MainPage {
         return customerButton.isDisplayed() && managerButton.isDisplayed();
     }
 
-    public LoginPage clickOnCustomerLoginPage(){
+    public LoginPage clickOnCustomerLoginPage() {
         customerButton.click();
         return new LoginPage(driver);
     }
 
-    public ManagerLoginPage clickOnManagerLoginPage(){
+    public ManagerLoginPage clickOnManagerLoginPage() {
         managerButton.click();
         return new ManagerLoginPage(driver);
     }
