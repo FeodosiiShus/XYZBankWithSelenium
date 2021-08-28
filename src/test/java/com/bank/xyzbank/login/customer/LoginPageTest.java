@@ -1,4 +1,4 @@
-package com.bank.xyzbank.login;
+package com.bank.xyzbank.login.customer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -17,27 +18,34 @@ public class LoginPageTest {
 
     private WebDriver webDriver;
 
-    public String name = "Harry Potter";
-
     @BeforeEach
-    public void initDriver(){
+    public void initDriver() {
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test
-    public void loginWithChooseName(){
-        var loginPage = new LoginPage();
-        loginPage.init(webDriver);
+    public void loginWithChooseName() {
+        String name = "Harry Potter";
+        var loginPage = new LoginPage(webDriver);
         webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
         loginPage.chooseLoginName(name);
+        assertTrue(loginPage.checkLoginButtonIsDisplayed());
         loginPage.pressButtonLogin();
         assertTrue(loginPage.checkLoginName(name));
         loginPage.logout();
     }
 
+    @Test
+    public void noLoginWithoutChooseName() {
+        var loginPage = new LoginPage(webDriver);
+        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
+        assertFalse(loginPage.checkLoginButtonIsDisplayed());
+    }
+
     @AfterEach
-    public void closeDriver(){
+    public void closeDriver() {
         webDriver.quit();
     }
 }
+

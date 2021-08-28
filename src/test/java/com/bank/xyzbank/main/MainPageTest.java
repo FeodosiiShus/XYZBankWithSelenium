@@ -22,11 +22,12 @@ public class MainPageTest {
     }
 
     @Test
-    public void mainPageOpen() {
-        var mainPage = new MainPage();
-        mainPage.init(driver);
+    public void mainPageOpen() throws InterruptedException {
+        var mainPage = new MainPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-        assertTrue(mainPage.checkMainPage());
+        assertTrue(mainPage.checkMainPage());//TODO: delete assertion
+        mainPage.clickOnCustomerLoginPage();
+        mainPage.clickOnManagerLoginPage();
     }
 
     @AfterEach

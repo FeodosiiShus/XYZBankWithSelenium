@@ -1,8 +1,9 @@
-package com.bank.xyzbank.login;
+package com.bank.xyzbank.login.customer;
 
 import com.bank.xyzbank.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -10,9 +11,14 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class LoginPage implements Page {
+public class LoginPage {
+
+    public LoginPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 
     @FindBy(css = "select[id='userSelect']")
+    @CacheLookup
     WebElement select;
 
     private Select selectLoginName;
@@ -26,15 +32,15 @@ public class LoginPage implements Page {
     @FindBy(css = "button[class='btn logout']")
     private WebElement logoutButton;
 
-    @Override
-    public void init(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-    }
 
     public void chooseLoginName(String name) {
         selectLoginName = new Select(select);
         selectLoginName.selectByVisibleText(name);
 
+    }
+
+    public boolean checkLoginButtonIsDisplayed(){
+        return loginButton.isDisplayed();
     }
 
     public void pressButtonLogin() {
