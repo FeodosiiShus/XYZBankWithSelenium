@@ -1,5 +1,6 @@
-package com.bank.xyzbank.main;
+package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.pages.MainPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

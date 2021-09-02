@@ -1,4 +1,4 @@
-package com.bank.xyzbank.login.customer;
+package com.bank.xyzbank.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,6 @@ public class LoginPage {
     public void chooseLoginName(String name) {
         selectLoginName = new Select(select);
         selectLoginName.selectByVisibleText(name);
-
     }
 
     public boolean checkLoginButtonIsDisplayed() {

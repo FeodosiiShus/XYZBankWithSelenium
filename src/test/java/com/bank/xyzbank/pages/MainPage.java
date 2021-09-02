@@ -1,7 +1,5 @@
-package com.bank.xyzbank.main;
+package com.bank.xyzbank.pages;
 
-import com.bank.xyzbank.login.customer.LoginPage;
-import com.bank.xyzbank.login.manager.ManagerLoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

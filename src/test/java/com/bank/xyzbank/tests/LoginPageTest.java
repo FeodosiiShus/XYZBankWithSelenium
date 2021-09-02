@@ -1,5 +1,6 @@
-package com.bank.xyzbank.login.customer;
+package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.pages.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
