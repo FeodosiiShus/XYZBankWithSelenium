@@ -27,23 +27,44 @@ public class CustomerAccountPageTest {
     public void initDriver() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @Test
-    public void checkAccountNumber() {
         loginPage = new LoginPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
         loginPage.chooseLoginName("Harry Potter");
         loginPage.pressButtonLogin();
         customerAccountPage = new CustomerAccountPage(driver);
+    }
+
+    @Test
+    public void checkAccountNumber() {
         customerAccountPage.chooseAccountNumber(accountNumber);
         assertTrue(customerAccountPage.currencyRupee.isDisplayed());
         assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyPound));
         assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyDollar));
         assertEquals(customerAccountPage.accountNumberValue.getText(), accountNumber);
-
     }
 
+    @Test
+    public void createDeposit() {
+        String balanceVal = customerAccountPage.balanceValue.getText();
+        customerAccountPage.createDeposit("100", driver);
+        assertNotEquals(balanceVal, customerAccountPage.balanceValue.getText());
+        assertEquals("100", customerAccountPage.currentBalanceValue(driver));
+    }
+
+    /**
+     * Script for create transaction isn't fast and test randomly failed
+     *  and table doesn't refresh when script is done
+     */
+    @Test
+    public void checkTransactionIsExists(){
+        customerAccountPage.goToTransactions.click();
+        //assertFalse(customerAccountPage.checkTransactionsIsExist(driver));
+        customerAccountPage.backToCustomerPageButton.click();
+        customerAccountPage.createDeposit("200", driver);
+        customerAccountPage.goToTransactions.click();
+        driver.navigate().refresh();
+        assertTrue(customerAccountPage.checkTransactionsIsExist(driver));
+    }
 
     @AfterEach
     public void closeDriver() {
