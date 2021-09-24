@@ -51,19 +51,24 @@ public class CustomerAccountPageTest {
         assertEquals("100", customerAccountPage.currentBalanceValue(driver));
     }
 
-    /**
-     * Script for create transaction isn't fast and test randomly failed
-     *  and table doesn't refresh when script is done
-     */
     @Test
-    public void checkTransactionIsExists(){
+    public void checkTransactionIsExists() {
         customerAccountPage.goToTransactions.click();
-        //assertFalse(customerAccountPage.checkTransactionsIsExist(driver));
+        assertFalse(customerAccountPage.checkTransactionsIsExist());
         customerAccountPage.backToCustomerPageButton.click();
         customerAccountPage.createDeposit("200", driver);
+        driver.navigate().refresh();
         customerAccountPage.goToTransactions.click();
         driver.navigate().refresh();
-        assertTrue(customerAccountPage.checkTransactionsIsExist(driver));
+        assertTrue(customerAccountPage.checkTransactionsIsExist());
+    }
+
+    @Test
+    public void createDepositAndWithdraw() {
+        customerAccountPage.createDeposit("200", driver);
+        driver.navigate().refresh();
+        customerAccountPage.createWithdraw("200", driver);
+        assertEquals("0", customerAccountPage.currentBalanceValue(driver));
     }
 
     @AfterEach

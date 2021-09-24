@@ -12,7 +12,7 @@ com/bank/xyzbank/pages/ManagerLoginPage.java
  com.bank.xyzbank.pages.ManagerLoginPage
 com/bank/xyzbank/tests/ManagerLoginPageTest.java
  com.bank.xyzbank.tests.ManagerLoginPageTest
-com/bank/xyzbank/tests/CustomerAccountPageTest.java
- com.bank.xyzbank.tests.CustomerAccountPageTest
 com/bank/xyzbank/pages/CustomerAccountPage.java
  com.bank.xyzbank.pages.CustomerAccountPage
+com/bank/xyzbank/tests/CustomerAccountPageTest.java
+ com.bank.xyzbank.tests.CustomerAccountPageTest

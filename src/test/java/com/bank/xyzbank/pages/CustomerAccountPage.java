@@ -1,9 +1,6 @@
 package com.bank.xyzbank.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -49,6 +46,12 @@ public class CustomerAccountPage {
     @FindBy(css = "button[ng-click='back()']")
     public WebElement backToCustomerPageButton;
 
+    @FindBy(css = "button[ng-click='withdrawl()']")
+    public WebElement withdrawButton;
+
+    @FindBy(css = "button[ng-click='reset()']")
+    public WebElement resetTransactionsButton;
+
     private Select select;
 
     public Select chooseAccountNumber(String number) {
@@ -69,20 +72,28 @@ public class CustomerAccountPage {
 
     public String currentBalanceValue(WebDriver driver) {
         WebElement waitBalanceValue = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/div/div[2]/div/div[2]/strong[2]"))); //TODO: refactor to new locator
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]"))); //TODO: refactor to new locator
         return waitBalanceValue.getText();
     }
 
-    public boolean checkTransactionsIsExist(WebDriver driver) {
+    public boolean checkTransactionsIsExist() {
         try {
-            WebElement waitTransactionItem = new WebDriverWait(driver, 3)
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("td[class=ng-binding]")));
-            return waitTransactionItem.isDisplayed();
+            return transactionItem.isDisplayed();
         } catch (NoSuchElementException exception) {
             return false;
         }
     }
 
+    public void createWithdraw(String withdrawValue, WebDriver driver) {
+        withdrawButton.click();
+        WebElement waitInputWithdraw = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='number']")));
+        waitInputWithdraw.sendKeys(withdrawValue);
+
+        WebElement waitButtonConfirmWithdraw = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[4]/div/form/button")));
+        waitButtonConfirmWithdraw.click();
+    }
 
     public boolean checkWebElementExist(WebElement element) {
         try {
