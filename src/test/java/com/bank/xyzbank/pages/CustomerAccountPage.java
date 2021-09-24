@@ -16,50 +16,53 @@ public class CustomerAccountPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "select[id='accountSelect']") //TODO: add comment to elements
-    private WebElement selectElement;
+    @FindBy(css = "select[id='accountSelect']")
+    private WebElement selectAccountElement; // Select web element to choose account
 
     @FindBy(css = "div:nth-child(3) > strong:nth-child(1)")
     public WebElement accountNumberValue;
 
     @FindBy(xpath = "//strong[contains(text(), 'Rupee')]")
-    public WebElement currencyRupee;
+    public WebElement currencyRupee; // Currency in rupee
 
     @FindBy(xpath = "//strong[contains(text(), 'Dollar')]")
-    public WebElement currencyDollar;
+    public WebElement currencyDollar; // Currency in dollar
 
     @FindBy(xpath = "//strong[contains(text(), 'Pound')]")
-    public WebElement currencyPound;
+    public WebElement currencyPound; // Currency in pound
 
     @FindBy(xpath = "//div[2]/div/div[2]/strong[2]")
-    public WebElement balanceValue;
+    public WebElement balanceValue; // Value of account balance
 
     @FindBy(css = "button[ng-click='deposit()']")
-    private WebElement buttonDeposit;
+    private WebElement buttonDeposit; // Button for create deposit
 
     @FindBy(css = "td[class=ng-binding]")
-    private WebElement transactionItem;
+    private WebElement transactionItem; // Item of transaction list
 
     @FindBy(css = "button[ng-click='transactions()']")
-    public WebElement goToTransactions;
+    public WebElement goToTransactions; // Button goes to page with transactions list
 
     @FindBy(css = "button[ng-click='back()']")
-    public WebElement backToCustomerPageButton;
+    public WebElement backToCustomerPageButton; // Button goes to page with customer account
 
     @FindBy(css = "button[ng-click='withdrawl()']")
-    public WebElement withdrawButton;
+    public WebElement withdrawButton; // Button for create withdraw
 
-    @FindBy(css = "button[ng-click='reset()']")
-    public WebElement resetTransactionsButton;
 
-    private Select select;
+    private Select selectAccount; // Select element to choose account
 
-    public Select chooseAccountNumber(String number) {
-        select = new Select(selectElement);
-        select.selectByVisibleText(number);
-        return select;
+    /**
+     * Choose account by number
+     */
+    public void chooseAccountNumber(String number) {
+        selectAccount = new Select(selectAccountElement);
+        selectAccount.selectByVisibleText(number);
     }
 
+    /**
+     * Create deposit with waiting input and button element
+     */
     public void createDeposit(String depositValue, WebDriver driver) { //TODO: add comments to waitElements
         buttonDeposit.click();
         WebElement waitInsertDepositValue = (new WebDriverWait(driver, 10))
@@ -70,12 +73,18 @@ public class CustomerAccountPage {
         waitButtonConfirmDeposit.click();
     }
 
+    /**
+     * Check current balance value
+     */
     public String currentBalanceValue(WebDriver driver) {
         WebElement waitBalanceValue = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]"))); //TODO: refactor to new locator
         return waitBalanceValue.getText();
     }
 
+    /**
+     * Check transaction exist by present element on page
+     */
     public boolean checkTransactionsIsExist() {
         try {
             return transactionItem.isDisplayed();
@@ -84,6 +93,9 @@ public class CustomerAccountPage {
         }
     }
 
+    /**
+     * Create withdraw with waiting input and button element
+     */
     public void createWithdraw(String withdrawValue, WebDriver driver) {
         withdrawButton.click();
         WebElement waitInputWithdraw = (new WebDriverWait(driver, 10))
@@ -95,6 +107,9 @@ public class CustomerAccountPage {
         waitButtonConfirmWithdraw.click();
     }
 
+    /**
+     * Check some element exists
+     */
     public boolean checkWebElementExist(WebElement element) {
         try {
             return element.isDisplayed();
