@@ -19,8 +19,8 @@ public class CustomerAccountPage {
     @FindBy(css = "select[id='accountSelect']")
     private WebElement selectAccountElement; // Select web element to choose account
 
-    @FindBy(css = "div:nth-child(3) > strong:nth-child(1)")
-    public WebElement accountNumberValue;
+    @FindBy(css = "div:nth-child(3) > strong:nth-child(1)") // TODO: refactor locator account number
+    public WebElement accountNumberValue; // Account number
 
     @FindBy(xpath = "//strong[contains(text(), 'Rupee')]")
     public WebElement currencyRupee; // Currency in rupee
@@ -31,7 +31,7 @@ public class CustomerAccountPage {
     @FindBy(xpath = "//strong[contains(text(), 'Pound')]")
     public WebElement currencyPound; // Currency in pound
 
-    @FindBy(xpath = "//div[2]/div/div[2]/strong[2]")
+    @FindBy(xpath = "//div[2]/div/div[2]/strong[2]") // TODO: refactor locator balance value
     public WebElement balanceValue; // Value of account balance
 
     @FindBy(css = "button[ng-click='deposit()']")
@@ -69,7 +69,7 @@ public class CustomerAccountPage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[ng-model='amount']")));
         waitInsertDepositValue.sendKeys(depositValue);
         WebElement waitButtonConfirmDeposit = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.className("btn-default")));//TODO: refactor to good locator
+                .until(ExpectedConditions.presenceOfElementLocated(By.className("btn-default")));
         waitButtonConfirmDeposit.click();
     }
 
