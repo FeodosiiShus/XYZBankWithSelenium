@@ -1,18 +1,16 @@
 com/bank/xyzbank/tests/MainPageTest.java
  com.bank.xyzbank.tests.MainPageTest
-com/bank/xyzbank/Page.java
- com.bank.xyzbank.Page
+com/bank/xyzbank/pages/CustomerAccountPage.java
+ com.bank.xyzbank.pages.CustomerAccountPage
 com/bank/xyzbank/tests/LoginPageTest.java
  com.bank.xyzbank.tests.LoginPageTest
-com/bank/xyzbank/pages/MainPage.java
- com.bank.xyzbank.pages.MainPage
+com/bank/xyzbank/tests/CustomerAccountPageTest.java
+ com.bank.xyzbank.tests.CustomerAccountPageTest
 com/bank/xyzbank/pages/LoginPage.java
  com.bank.xyzbank.pages.LoginPage
+com/bank/xyzbank/pages/MainPage.java
+ com.bank.xyzbank.pages.MainPage
 com/bank/xyzbank/pages/ManagerLoginPage.java
  com.bank.xyzbank.pages.ManagerLoginPage
 com/bank/xyzbank/tests/ManagerLoginPageTest.java
  com.bank.xyzbank.tests.ManagerLoginPageTest
-com/bank/xyzbank/tests/CustomerAccountPageTest.java
- com.bank.xyzbank.tests.CustomerAccountPageTest
-com/bank/xyzbank/pages/CustomerAccountPage.java
- com.bank.xyzbank.pages.CustomerAccountPage

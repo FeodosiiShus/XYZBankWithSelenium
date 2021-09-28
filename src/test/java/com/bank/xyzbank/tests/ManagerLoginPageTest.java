@@ -1,5 +1,7 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.pages.LoginPage;
+import com.bank.xyzbank.pages.MainPage;
 import com.bank.xyzbank.pages.ManagerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,24 +18,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class ManagerLoginPageTest {
 
-    private WebDriver webDriver;
+    private WebDriver driver;
+
+    ManagerLoginPage managerLoginPage;
+    MainPage mainPage;
 
     @BeforeEach
-    public void initDriver(){
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void initDriver() {
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        mainPage = new MainPage(driver);
+        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
+        mainPage.clickOnManagerLoginPage();
     }
 
     @Test
-    public void openManagerLoginPage(){
-        var managerLoginPage = new ManagerLoginPage(webDriver);
-        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+    public void checkManagerLoginPageIsOpen() {
+        managerLoginPage = new ManagerLoginPage(driver);
         assertTrue(managerLoginPage.checkManagerLoginPage());
     }
 
+    @Test
+    public void createNewCustomerAndCheckInCustomers() {
+        managerLoginPage = new ManagerLoginPage(driver);
+        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
+    }
+
     @AfterEach
-    public void closeDriver(){
-        webDriver.quit();
+    public void closeDriver() {
+        driver.quit();
     }
 
 }
