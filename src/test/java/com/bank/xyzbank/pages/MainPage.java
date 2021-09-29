@@ -24,9 +24,8 @@ public class MainPage {
         return customerButton.isDisplayed() && managerButton.isDisplayed();
     }
 
-    public LoginPage clickOnCustomerLoginPage() {
+    public void goToCustomerLoginPage() {
         customerButton.click();
-        return new LoginPage(driver);
     }
 
     public ManagerLoginPage clickOnManagerLoginPage() {

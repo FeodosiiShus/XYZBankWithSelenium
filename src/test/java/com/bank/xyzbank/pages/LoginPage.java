@@ -32,17 +32,14 @@ public class LoginPage {
     private WebElement logoutButton;
 
 
-    public void chooseLoginName(String name) {
+    public void chooseLoginNameAndLogin(String name) {
         selectLoginName = new Select(select);
         selectLoginName.selectByVisibleText(name);
+        loginButton.click();
     }
 
     public boolean checkLoginButtonIsDisplayed() {
         return loginButton.isDisplayed();
-    }
-
-    public void pressButtonLogin() {
-        loginButton.click();
     }
 
     public boolean checkLoginName(String name) {

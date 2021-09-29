@@ -49,6 +49,9 @@ public class CustomerAccountPage {
     @FindBy(css = "button[ng-click='withdrawl()']")
     public WebElement withdrawButton; // Button for create withdraw
 
+    @FindBy(css = "span[class='fontBig ng-binding']")
+    private WebElement nameOfAccount;
+
 
     private Select selectAccount; // Select element to choose account
 
@@ -117,5 +120,9 @@ public class CustomerAccountPage {
             return false;
         }
 
+    }
+
+    public String getNameOfCurrentAccount(){
+        return nameOfAccount.getText();
     }
 }

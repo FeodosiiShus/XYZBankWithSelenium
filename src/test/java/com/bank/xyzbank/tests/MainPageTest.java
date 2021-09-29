@@ -27,7 +27,7 @@ public class MainPageTest {
         var mainPage = new MainPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
         assertTrue(mainPage.checkMainPage());
-        mainPage.clickOnCustomerLoginPage();
+        mainPage.goToCustomerLoginPage();
         mainPage.clickOnManagerLoginPage();
     }
 

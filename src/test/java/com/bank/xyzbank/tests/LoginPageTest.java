@@ -30,9 +30,8 @@ public class LoginPageTest {
         String name = "Harry Potter";
         var loginPage = new LoginPage(webDriver);
         webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
-        loginPage.chooseLoginName(name);
+        loginPage.chooseLoginNameAndLogin(name);
         assertTrue(loginPage.checkLoginButtonIsDisplayed());
-        loginPage.pressButtonLogin();
         assertTrue(loginPage.checkLoginName(name));
         loginPage.logout();
     }

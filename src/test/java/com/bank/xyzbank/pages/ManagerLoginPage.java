@@ -24,6 +24,9 @@ public class ManagerLoginPage {
     @FindBy(css = "button[ng-class='btnClass3']")
     public WebElement buttonCustomers;
 
+    @FindBy(css = "button[ng-click='home()']")
+    public WebElement homeButton;
+
 
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
@@ -64,6 +67,10 @@ public class ManagerLoginPage {
                 .findAny()
                 .orElse(null);
         return foundCustomer != null;
+    }
+
+    public void goToHomePage(){
+        homeButton.click();
     }
 
 }

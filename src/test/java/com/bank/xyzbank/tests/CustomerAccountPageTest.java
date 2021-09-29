@@ -29,8 +29,7 @@ public class CustomerAccountPageTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
-        loginPage.chooseLoginName("Harry Potter");
-        loginPage.pressButtonLogin();
+        loginPage.chooseLoginNameAndLogin("Harry Potter");
         customerAccountPage = new CustomerAccountPage(driver);
     }
 
