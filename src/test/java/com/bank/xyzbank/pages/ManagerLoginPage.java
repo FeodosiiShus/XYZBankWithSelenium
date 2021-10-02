@@ -62,14 +62,14 @@ public class ManagerLoginPage {
         return checkAlert;
     }
 
-    public boolean searchCreatedUser(WebDriver driver, String searchCustomer) {
+    public boolean searchCreatedUser(WebDriver driver, String firstNameOrLastName) {
         buttonCustomers.click();
         var waitSearchInput = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='Search Customer']")));
-        waitSearchInput.sendKeys(searchCustomer);
+        waitSearchInput.sendKeys(firstNameOrLastName);
         var listOfCustomers = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("td[class='ng-binding']")));
-        var foundCustomer = listOfCustomers.stream().parallel().filter(listOfCustomer -> searchCustomer.equals(listOfCustomer.getText()))
+        var foundCustomer = listOfCustomers.stream().parallel().filter(listOfCustomer -> firstNameOrLastName.equals(listOfCustomer.getText()))
                 .findAny()
                 .orElse(null); // TODO: check orElse
         return foundCustomer != null;
@@ -97,6 +97,12 @@ public class ManagerLoginPage {
         String idAccountNumber = waitAlertOpenAccount.getText().substring(lengthAlert - 4);
         waitAlertOpenAccount.accept();
         return idAccountNumber;
+    }
+
+    public void deleteCustomer(WebDriver driver){
+        var waitDeleteButton = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[ng-click='deleteCust(cust)']")));
+        waitDeleteButton.click();
     }
 
     public void goToHomePage() {

@@ -7,13 +7,13 @@ import com.bank.xyzbank.pages.ManagerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
@@ -76,6 +76,15 @@ class ManagerLoginPageTest {
         loginPage.chooseLoginNameAndLogin("Test Test");
         customerAccountPage = new CustomerAccountPage(driver);
         customerAccountPage.chooseAccountNumber(idAccount);
+    }
+
+    @Test
+    public void createNewCustomerAndDelete(){
+        managerLoginPage = new ManagerLoginPage(driver);
+        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
+        managerLoginPage.deleteCustomer(driver);
     }
 
     @AfterEach
