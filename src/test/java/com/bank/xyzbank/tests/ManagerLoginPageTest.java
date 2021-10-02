@@ -60,8 +60,22 @@ class ManagerLoginPageTest {
         loginPage = new LoginPage(driver);
         loginPage.chooseLoginNameAndLogin("Test Test");
         customerAccountPage = new CustomerAccountPage(driver);
-        assertEquals("Test Test",customerAccountPage.getNameOfCurrentAccount());
+        assertEquals("Test Test", customerAccountPage.getNameOfCurrentAccount());
+    }
 
+    @Test
+    public void createNewCustomerAndOpenAccountForHim() {
+        managerLoginPage = new ManagerLoginPage(driver);
+        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
+        var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount(driver);
+        managerLoginPage.goToHomePage();
+        mainPage.goToCustomerLoginPage();
+        loginPage = new LoginPage(driver);
+        loginPage.chooseLoginNameAndLogin("Test Test");
+        customerAccountPage = new CustomerAccountPage(driver);
+        customerAccountPage.chooseAccountNumber(idAccount);
     }
 
     @AfterEach

@@ -1,9 +1,12 @@
 package com.bank.xyzbank.pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -16,16 +19,19 @@ public class ManagerLoginPage {
     }
 
     @FindBy(css = "button[ng-class='btnClass1']")
-    public WebElement buttonAddCustomer;
+    private WebElement buttonAddCustomer;
 
     @FindBy(css = "button[ng-class='btnClass2']")
-    public WebElement buttonOpenAccount;
+    private WebElement buttonOpenAccount;
 
     @FindBy(css = "button[ng-class='btnClass3']")
-    public WebElement buttonCustomers;
+    private WebElement buttonCustomers;
 
     @FindBy(css = "button[ng-click='home()']")
-    public WebElement homeButton;
+    private WebElement homeButton;
+
+    @FindBy(css = "button[ng-click='openAccount()']")
+    private WebElement openAccountButton;
 
 
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
@@ -65,11 +71,35 @@ public class ManagerLoginPage {
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("td[class='ng-binding']")));
         var foundCustomer = listOfCustomers.stream().parallel().filter(listOfCustomer -> searchCustomer.equals(listOfCustomer.getText()))
                 .findAny()
-                .orElse(null);
+                .orElse(null); // TODO: check orElse
         return foundCustomer != null;
     }
 
-    public void goToHomePage(){
+    public void openAccountNumberForCustomer(WebDriver driver, String firstName, String lastName) {
+        openAccountButton.click();
+        var waitSelectCustomer = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']")));
+        var selectCustomer = new Select(waitSelectCustomer);
+        selectCustomer.selectByVisibleText(firstName + " " + lastName);
+        var waitSelectCurrency = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
+        var selectCurrencyForCustomer = new Select(waitSelectCurrency);
+        selectCurrencyForCustomer.selectByVisibleText("Dollar");
+        var waitButtonProcess = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Process']")));
+        waitButtonProcess.click();
+    }
+
+    public String confirmAlertOpenAccountAndReturnIdAccount(WebDriver driver) {
+        var waitAlertOpenAccount = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.alertIsPresent());
+        var lengthAlert = waitAlertOpenAccount.getText().length();
+        String idAccountNumber = waitAlertOpenAccount.getText().substring(lengthAlert - 4);
+        waitAlertOpenAccount.accept();
+        return idAccountNumber;
+    }
+
+    public void goToHomePage() {
         homeButton.click();
     }
 

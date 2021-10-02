@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bank.xyzbank.tests.ManagerLoginPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-29T14:39:13" hostname="DESKTOP-0LK3DIQ" time="8.731">
+<testsuite name="com.bank.xyzbank.tests.ManagerLoginPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-02T13:48:41" hostname="DESKTOP-0LK3DIQ" time="8.601">
   <properties/>
-  <testcase name="createNewCustomerAndCheckInCustomerPage()" classname="com.bank.xyzbank.tests.ManagerLoginPageTest" time="8.731"/>
+  <testcase name="createNewCustomerAndOpenAccountForHim()" classname="com.bank.xyzbank.tests.ManagerLoginPageTest" time="8.601"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 43147
+  <system-err><![CDATA[Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 9994
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
-сент. 29, 2021 5:39:15 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+окт. 02, 2021 4:48:44 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
 ]]></system-err>
 </testsuite>
