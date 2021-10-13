@@ -70,6 +70,7 @@ public class CustomerAccountPage {
         buttonDeposit.click();
         WebElement waitInsertDepositValue = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[ng-model='amount']")));
+        waitInsertDepositValue.clear();
         waitInsertDepositValue.sendKeys(depositValue);
         WebElement waitButtonConfirmDeposit = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.className("btn-default")));
@@ -103,6 +104,7 @@ public class CustomerAccountPage {
         withdrawButton.click();
         WebElement waitInputWithdraw = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='number']")));
+        waitInputWithdraw.clear();
         waitInputWithdraw.sendKeys(withdrawValue);
 
         WebElement waitButtonConfirmWithdraw = (new WebDriverWait(driver, 10))

@@ -38,11 +38,6 @@ public class ManagerLoginPage {
     @FindBy(css = "button[ng-click='openAccount()']")
     private WebElement openAccountButton;
 
-    public WebElement newWebElement(WebDriver driver, String selector) {
-        return new WebDriverWait(driver, 10)
-                .until(driver1 -> driver.findElement(By.cssSelector(selector)));
-    }
-
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
     }
@@ -51,12 +46,15 @@ public class ManagerLoginPage {
         buttonAddCustomer.click();
         var waitFirstNameInsert = (new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='First Name']"))));
+        waitFirstNameInsert.clear();
         waitFirstNameInsert.sendKeys(firstName);
         var waitLastNameInsert = (new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='Last Name']"))));
+        waitLastNameInsert.clear();
         waitLastNameInsert.sendKeys(lastName);
         var waitPostCodeInsert = (new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='Post Code']"))));
+        waitPostCodeInsert.clear();
         waitPostCodeInsert.sendKeys(postCode);
         var waitAddCustomerButton = (new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Add Customer']"))));
@@ -75,6 +73,7 @@ public class ManagerLoginPage {
         buttonCustomers.click();
         var waitSearchInput = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='Search Customer']")));
+        waitSearchInput.clear();
         waitSearchInput.sendKeys(firstNameOrLastName);
         var listOfCustomers = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("td[class='ng-binding']")));
