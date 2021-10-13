@@ -8,9 +8,13 @@ com/bank/xyzbank/pages/CustomerAccountPage.java
  com.bank.xyzbank.pages.CustomerAccountPage
 com/bank/xyzbank/pages/LoginPage.java
  com.bank.xyzbank.pages.LoginPage
+com/bank/xyzbank/helpers/WaitHelper.java
+ com.bank.xyzbank.helpers.WaitHelper
 com/bank/xyzbank/pages/MainPage.java
  com.bank.xyzbank.pages.MainPage
 com/bank/xyzbank/pages/ManagerLoginPage.java
  com.bank.xyzbank.pages.ManagerLoginPage
+com/bank/xyzbank/helpers/PageUrls.java
+ com.bank.xyzbank.helpers.PageUrls
 com/bank/xyzbank/tests/ManagerLoginPageTest.java
  com.bank.xyzbank.tests.ManagerLoginPageTest

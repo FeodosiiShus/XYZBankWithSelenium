@@ -8,14 +8,19 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
 public class ManagerLoginPage {
 
+    private final Logger logger = LoggerFactory.getLogger(ManagerLoginPage.class);
+
     public ManagerLoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        logger.info("* Create manager login page *");
     }
 
     @FindBy(css = "button[ng-class='btnClass1']")
@@ -33,6 +38,10 @@ public class ManagerLoginPage {
     @FindBy(css = "button[ng-click='openAccount()']")
     private WebElement openAccountButton;
 
+    public WebElement newWebElement(WebDriver driver, String selector) {
+        return new WebDriverWait(driver, 10)
+                .until(driver1 -> driver.findElement(By.cssSelector(selector)));
+    }
 
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
@@ -69,7 +78,7 @@ public class ManagerLoginPage {
         waitSearchInput.sendKeys(firstNameOrLastName);
         var listOfCustomers = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("td[class='ng-binding']")));
-        var foundCustomer = listOfCustomers.stream().parallel().filter(listOfCustomer -> firstNameOrLastName.equals(listOfCustomer.getText()))
+        var foundCustomer = listOfCustomers.parallelStream().filter(listOfCustomer -> firstNameOrLastName.equals(listOfCustomer.getText()))
                 .findAny()
                 .orElse(null); // TODO: check orElse
         return foundCustomer != null;
@@ -99,7 +108,7 @@ public class ManagerLoginPage {
         return idAccountNumber;
     }
 
-    public void deleteCustomer(WebDriver driver){
+    public void deleteCustomer(WebDriver driver) {
         var waitDeleteButton = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[ng-click='deleteCust(cust)']")));
         waitDeleteButton.click();
