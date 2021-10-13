@@ -45,7 +45,7 @@ class ManagerLoginPageTest {
     @Test
     public void createNewCustomerAndCheckInCustomers() {
         managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
     }
@@ -53,7 +53,7 @@ class ManagerLoginPageTest {
     @Test
     public void createNewCustomerAndCheckInCustomerPage() {
         managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         managerLoginPage.goToHomePage();
         mainPage.goToCustomerLoginPage();
@@ -66,7 +66,7 @@ class ManagerLoginPageTest {
     @Test
     public void createNewCustomerAndOpenAccountForHim() {
         managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
         var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount(driver);
@@ -81,10 +81,10 @@ class ManagerLoginPageTest {
     @Test
     public void createNewCustomerAndDelete() {
         managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
+        managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
-        managerLoginPage.deleteCustomer(driver);
+        managerLoginPage.deleteCustomer();
     }
 
     @AfterEach
