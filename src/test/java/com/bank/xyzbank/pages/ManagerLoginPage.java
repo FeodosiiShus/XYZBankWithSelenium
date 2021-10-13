@@ -1,5 +1,6 @@
 package com.bank.xyzbank.pages;
 
+import com.bank.xyzbank.helpers.AlertHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,8 @@ import org.slf4j.LoggerFactory;
  * Created by Kreminskyi A.A. on авг., 2021
  */
 public class ManagerLoginPage {
+
+    AlertHelper alertHelper;
 
     private final Logger logger = LoggerFactory.getLogger(ManagerLoginPage.class);
 
@@ -61,11 +64,10 @@ public class ManagerLoginPage {
         waitAddCustomerButton.click();
     }
 
-    public boolean checkAlertCreateCustomer(WebDriver driver) {
-        var waitAlertCreateCustomer = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.alertIsPresent());
-        boolean checkAlert = waitAlertCreateCustomer.getText().contains("Customer added successfully");
-        waitAlertCreateCustomer.accept();
+    public boolean acceptAlertCreateCustomer(WebDriver driver) {
+        alertHelper = new AlertHelper(driver);
+        boolean checkAlert = alertHelper.getTextInAlert().contains("Customer added successfully");
+        alertHelper.acceptAlertIfPresent();
         return checkAlert;
     }
 

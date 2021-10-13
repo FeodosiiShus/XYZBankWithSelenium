@@ -46,7 +46,7 @@ class ManagerLoginPageTest {
     public void createNewCustomerAndCheckInCustomers() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
-        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
     }
 
@@ -54,7 +54,7 @@ class ManagerLoginPageTest {
     public void createNewCustomerAndCheckInCustomerPage() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
-        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         managerLoginPage.goToHomePage();
         mainPage.goToCustomerLoginPage();
         loginPage = new LoginPage(driver);
@@ -67,7 +67,7 @@ class ManagerLoginPageTest {
     public void createNewCustomerAndOpenAccountForHim() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
-        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
         var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount(driver);
         managerLoginPage.goToHomePage();
@@ -82,7 +82,7 @@ class ManagerLoginPageTest {
     public void createNewCustomerAndDelete() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer(driver, "Test", "Test", "100");
-        assertTrue(managerLoginPage.checkAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
         managerLoginPage.deleteCustomer(driver);
     }
