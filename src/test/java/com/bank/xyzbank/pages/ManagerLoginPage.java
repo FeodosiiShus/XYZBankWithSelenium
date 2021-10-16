@@ -1,6 +1,7 @@
 package com.bank.xyzbank.pages;
 
 import com.bank.xyzbank.helpers.AlertHelper;
+import com.bank.xyzbank.helpers.SelectHelper;
 import com.bank.xyzbank.helpers.WaitHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +20,12 @@ public class ManagerLoginPage extends BasePage {
 
     AlertHelper alertHelper;
     WaitHelper waitHelper;
+    SelectHelper selectHelper;
 
     public ManagerLoginPage(WebDriver driver) {
         super(driver);
         waitHelper = new WaitHelper(driver);
+        selectHelper = new SelectHelper(driver);
     }
 
     @FindBy(css = "button[ng-class='btnClass1']")
@@ -97,8 +100,9 @@ public class ManagerLoginPage extends BasePage {
         openAccountButton.click();
         var waitSelectCustomer = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']"))); //TODO: add helper for select
-        var selectCustomer = new Select(waitSelectCustomer);
-        selectCustomer.selectByVisibleText(firstName + " " + lastName);
+        selectHelper.selectByVisibleText(waitSelectCustomer, firstName + " " + lastName);
+        //var selectCustomer = new Select(waitSelectCustomer);
+        //selectCustomer.selectByVisibleText(firstName + " " + lastName);
 
         var waitSelectCurrency = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
