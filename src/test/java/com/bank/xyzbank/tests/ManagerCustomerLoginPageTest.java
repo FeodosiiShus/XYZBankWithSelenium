@@ -47,15 +47,15 @@ class ManagerCustomerLoginPageTest {
     public void createNewCustomerAndCheckInCustomers() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
-        assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
+        assertTrue(managerLoginPage.searchCreatedUser( "Test"));
     }
 
     @Test
     public void createNewCustomerAndCheckInCustomerPage() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
         managerLoginPage.goToHomePage();
         homePage.goToCustomerLoginPage();
         customerLoginPage = new CustomerLoginPage(driver);
@@ -68,7 +68,7 @@ class ManagerCustomerLoginPageTest {
     public void createNewCustomerAndOpenAccountForHim() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
         managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
         var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount(driver);
         managerLoginPage.goToHomePage();
@@ -83,8 +83,8 @@ class ManagerCustomerLoginPageTest {
     public void createNewCustomerAndDelete() {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
-        assertTrue(managerLoginPage.searchCreatedUser(driver, "Test"));
+        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
+        assertTrue(managerLoginPage.searchCreatedUser( "Test"));
         managerLoginPage.deleteCustomer();
     }
 

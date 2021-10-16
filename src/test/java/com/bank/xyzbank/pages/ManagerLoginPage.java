@@ -26,6 +26,7 @@ public class ManagerLoginPage extends BasePage {
         super(driver);
         waitHelper = new WaitHelper(driver);
         selectHelper = new SelectHelper(driver);
+        alertHelper = new AlertHelper(driver);
     }
 
     @FindBy(css = "button[ng-class='btnClass1']")
@@ -79,14 +80,13 @@ public class ManagerLoginPage extends BasePage {
         waitHelper.waitElementClickableAndClick(addCustomerButton, 10);
     }
 
-    public boolean acceptAlertCreateCustomer(WebDriver driver) {
-        alertHelper = new AlertHelper(driver);
+    public boolean acceptAlertCreateCustomer() {
         boolean checkAlert = alertHelper.getTextInAlert().contains("Customer added successfully");
         alertHelper.acceptAlertIfPresent();
         return checkAlert;
     }
 
-    public boolean searchCreatedUser(WebDriver driver, String firstNameOrLastName) {
+    public boolean searchCreatedUser(String firstNameOrLastName) {
         buttonCustomers.click();
         waitHelper.waitElementClickableWithClearAndSendText(searchInputCustomer, 10, firstNameOrLastName);
         var listOfCustomers = waitHelper.waitElementsVisibility(customerLocator, 10);

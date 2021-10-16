@@ -1,23 +1,24 @@
 package com.bank.xyzbank.pages;
 
-import org.openqa.selenium.By;
+import com.bank.xyzbank.helpers.SelectHelper;
+import com.bank.xyzbank.helpers.WaitHelper;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
 public class CustomerAccountPage extends BasePage {
 
+    WaitHelper waitHelper;
+    SelectHelper selectHelper;
+
     public CustomerAccountPage(WebDriver driver) {
         super(driver);
+        waitHelper = new WaitHelper(driver);
+        selectHelper = new SelectHelper(driver);
     }
 
     @FindBy(css = "select[id='accountSelect']")
@@ -35,8 +36,11 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(xpath = "//strong[contains(text(), 'Pound')]")
     private WebElement currencyPound; // Currency in pound
 
-    @FindBy(xpath = "//div[2]/div/div[2]/strong[2]") // TODO: refactor locator balance value
-    private WebElement balanceValue; // Value of account balance
+    @FindBy(css = ".center strong:nth-child(2)")
+    private WebElement balanceValue;
+
+    @FindBy(css = "input[type='number']")
+    private WebElement inputWithdraw;
 
     @FindBy(css = "button[ng-click='deposit()']")
     private WebElement buttonDeposit; // Button for create deposit
@@ -56,38 +60,37 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = "span[class='fontBig ng-binding']")
     private WebElement nameOfAccount;
 
+    @FindBy(css = "input[ng-model='amount']")
+    private WebElement insertDeposit;
 
-    private Select selectAccount; // Select element to choose account
+    @FindBy(css = ".btn-default")
+    private WebElement buttonConfirmDeposit;
+
+    @FindBy(css = "form .btn-default")
+    private WebElement buttonConfirmWithdraw;
+
 
     /**
      * Choose account by number
      */
     public void chooseAccountNumber(String number) {
-        selectAccount = new Select(selectAccountElement);
-        selectAccount.selectByVisibleText(number);
+        selectHelper.selectByVisibleText(selectAccountElement, number);
     }
 
     /**
      * Create deposit with waiting input and button element
      */
-    public void createDeposit(String depositValue, WebDriver driver) { //TODO: add comments to waitElements
+    public void createDeposit(String depositValue) {
         buttonDeposit.click();
-        WebElement waitInsertDepositValue = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[ng-model='amount']")));
-        waitInsertDepositValue.clear();
-        waitInsertDepositValue.sendKeys(depositValue);
-        WebElement waitButtonConfirmDeposit = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.className("btn-default")));
-        waitButtonConfirmDeposit.click();
+        waitHelper.waitElementClickableWithClearAndSendText(insertDeposit, 10, depositValue);
+        waitHelper.waitElementClickableAndClick(buttonConfirmDeposit, 10);
     }
 
     /**
      * Check current balance value
      */
-    public String currentBalanceValue(WebDriver driver) {
-        WebElement waitBalanceValue = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]"))); //TODO: refactor to new locator
-        return waitBalanceValue.getText();
+    public String currentBalanceValue() {
+        return waitHelper.waitElementClickable(balanceValue, 10).getText();
     }
 
     /**
@@ -104,49 +107,28 @@ public class CustomerAccountPage extends BasePage {
     /**
      * Create withdraw with waiting input and button element
      */
-    public void createWithdraw(String withdrawValue, WebDriver driver) {
+    public void createWithdraw(String withdrawValue) {
         withdrawButton.click();
-        WebElement waitInputWithdraw = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='number']")));
-        waitInputWithdraw.clear();
-        waitInputWithdraw.sendKeys(withdrawValue);
-
-        WebElement waitButtonConfirmWithdraw = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[4]/div/form/button")));
-        waitButtonConfirmWithdraw.click();
-    }
-
-    /**
-     * Check some element exists
-     */
-    public boolean checkWebElementExist(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-
+        waitHelper.waitElementClickableWithClearAndSendText(inputWithdraw, 10, withdrawValue);
+        waitHelper.waitElementClickableAndClick(buttonConfirmWithdraw, 10);
     }
 
     public String getAccountNumber() {
         return accountNumberValue.getText();
     }
 
-    public String getBalanceValue() {
-        return balanceValue.getText();
-    }
-
-    public boolean isDisplayedCurrencyRupee(){
+    public boolean isDisplayedCurrencyRupee() {
         return currencyRupee.isDisplayed();
     }
 
-    public void backToCustomerTab(){
+    public void backToCustomerTab() {
         backToCustomerPageButton.click();
     }
 
-    public void goToTransactionTab(){
+    public void goToTransactionTab() {
         goToTransactions.click();
     }
+
     public String getNameOfCurrentAccount() {
         return nameOfAccount.getText();
     }

@@ -45,10 +45,10 @@ public class CustomerAccountPageTest {
 
     @Test
     public void createDeposit() {
-        String balanceVal = customerAccountPage.getBalanceValue();
-        customerAccountPage.createDeposit("100", driver);
-        assertNotEquals(balanceVal, customerAccountPage.getBalanceValue());
-        assertEquals("100", customerAccountPage.currentBalanceValue(driver));
+        String balanceVal = customerAccountPage.currentBalanceValue();
+        customerAccountPage.createDeposit("100");
+        assertNotEquals(balanceVal, customerAccountPage.currentBalanceValue());
+        assertEquals("100", customerAccountPage.currentBalanceValue());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class CustomerAccountPageTest {
         customerAccountPage.goToTransactionTab();
         assertFalse(customerAccountPage.checkTransactionsIsExist());
         customerAccountPage.backToCustomerTab();
-        customerAccountPage.createDeposit("200", driver);
+        customerAccountPage.createDeposit("200");
         driver.navigate().refresh();
         customerAccountPage.goToTransactionTab();
         driver.navigate().refresh();
@@ -65,10 +65,10 @@ public class CustomerAccountPageTest {
 
     @Test
     public void createDepositAndWithdraw() {
-        customerAccountPage.createDeposit("200", driver);
+        customerAccountPage.createDeposit("200");
         driver.navigate().refresh();
-        customerAccountPage.createWithdraw("200", driver);
-        assertEquals("0", customerAccountPage.currentBalanceValue(driver));
+        customerAccountPage.createWithdraw("200");
+        assertEquals("0", customerAccountPage.currentBalanceValue());
     }
 
     @AfterEach
