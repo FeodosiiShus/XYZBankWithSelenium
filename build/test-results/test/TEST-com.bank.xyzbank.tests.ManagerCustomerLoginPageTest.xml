@@ -1,74 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-10-16T11:04:19" hostname="DESKTOP-0LK3DIQ" time="30.389">
+<testsuite name="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-16T11:45:25" hostname="DESKTOP-0LK3DIQ" time="10.123">
   <properties/>
-  <testcase name="createNewCustomerAndCheckInCustomers()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="6.072"/>
-  <testcase name="createNewCustomerAndCheckInCustomerPage()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="6.257"/>
-  <testcase name="createNewCustomerAndDelete()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="6.459"/>
-  <testcase name="checkManagerLoginPageIsOpen()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="4.367"/>
-  <testcase name="createNewCustomerAndOpenAccountForHim()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="7.226"/>
+  <testcase name="createNewCustomerAndDelete()" classname="com.bank.xyzbank.tests.ManagerCustomerLoginPageTest" time="10.123"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 26254
+  <system-err><![CDATA[Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 51612
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
-окт. 16, 2021 2:04:20 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+окт. 16, 2021 2:45:29 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
-[Test worker] INFO com.bank.xyzbank.pages.HomePage - * Create HomePage page *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert helper create *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Get text in alert: Customer added successfully with customer id :6 *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert is present *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert accepted *
-Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 40558
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-окт. 16, 2021 2:04:26 PM org.openqa.selenium.remote.ProtocolHandshake createSession
-INFO: Detected dialect: W3C
-[Test worker] INFO com.bank.xyzbank.pages.HomePage - * Create HomePage page *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert helper create *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Get text in alert: Customer added successfully with customer id :6 *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert is present *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert accepted *
-Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 14850
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-окт. 16, 2021 2:04:33 PM org.openqa.selenium.remote.ProtocolHandshake createSession
-INFO: Detected dialect: W3C
-[Test worker] INFO com.bank.xyzbank.pages.HomePage - * Create HomePage page *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert helper create *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Get text in alert: Customer added successfully with customer id :6 *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert is present *
-[Test worker] INFO com.bank.xyzbank.helpers.AlertHelper - * Alert accepted *
-Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 11310
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-окт. 16, 2021 2:04:39 PM org.openqa.selenium.remote.ProtocolHandshake createSession
-INFO: Detected dialect: W3C
-[Test worker] INFO com.bank.xyzbank.pages.HomePage - * Create HomePage page *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-[Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
-[Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *
-Starting ChromeDriver 94.0.4606.41 (333e85df3c9b656b518b5f1add5ff246365b6c24-refs/branch-heads/4606@{#845}) on port 14347
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-окт. 16, 2021 2:04:43 PM org.openqa.selenium.remote.ProtocolHandshake createSession
-INFO: Detected dialect: W3C
+окт. 16, 2021 2:45:29 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+INFO: Found exact CDP implementation for version 94
 [Test worker] INFO com.bank.xyzbank.pages.HomePage - * Create HomePage page *
 [Test worker] INFO com.bank.xyzbank.pages.ManagerLoginPage - * Create ManagerLoginPage page *
 [Test worker] INFO com.bank.xyzbank.helpers.WaitHelper - * Wait helper created *

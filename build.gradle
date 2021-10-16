@@ -23,6 +23,7 @@ tasks.withType(JavaCompile) {
 dependencies {
     testImplementation('com.codeborne:selenide:5.22.0')
     testImplementation('org.slf4j:slf4j-simple:1.7.30')
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
@@ -68,11 +70,11 @@ public class CustomerAccountPage {
      */
     public void createDeposit(String depositValue, WebDriver driver) { //TODO: add comments to waitElements
         buttonDeposit.click();
-        WebElement waitInsertDepositValue = (new WebDriverWait(driver, 10))
+        WebElement waitInsertDepositValue = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[ng-model='amount']")));
         waitInsertDepositValue.clear();
         waitInsertDepositValue.sendKeys(depositValue);
-        WebElement waitButtonConfirmDeposit = (new WebDriverWait(driver, 10))
+        WebElement waitButtonConfirmDeposit = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.className("btn-default")));
         waitButtonConfirmDeposit.click();
     }
@@ -81,7 +83,7 @@ public class CustomerAccountPage {
      * Check current balance value
      */
     public String currentBalanceValue(WebDriver driver) {
-        WebElement waitBalanceValue = (new WebDriverWait(driver, 10))
+        WebElement waitBalanceValue = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]"))); //TODO: refactor to new locator
         return waitBalanceValue.getText();
     }
@@ -102,12 +104,12 @@ public class CustomerAccountPage {
      */
     public void createWithdraw(String withdrawValue, WebDriver driver) {
         withdrawButton.click();
-        WebElement waitInputWithdraw = (new WebDriverWait(driver, 10))
+        WebElement waitInputWithdraw = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='number']")));
         waitInputWithdraw.clear();
         waitInputWithdraw.sendKeys(withdrawValue);
 
-        WebElement waitButtonConfirmWithdraw = (new WebDriverWait(driver, 10))
+        WebElement waitButtonConfirmWithdraw = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div[2]/div/div[4]/div/form/button")));
         waitButtonConfirmWithdraw.click();
     }
@@ -124,7 +126,7 @@ public class CustomerAccountPage {
 
     }
 
-    public String getNameOfCurrentAccount(){
+    public String getNameOfCurrentAccount() {
         return nameOfAccount.getText();
     }
 }

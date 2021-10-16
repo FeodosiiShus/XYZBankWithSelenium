@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
@@ -93,12 +95,12 @@ public class ManagerLoginPage extends BasePage {
 
     public void openAccountNumberForCustomer(WebDriver driver, String firstName, String lastName) {
         openAccountButton.click();
-        var waitSelectCustomer = new WebDriverWait(driver, 10)
+        var waitSelectCustomer = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']"))); //TODO: add helper for select
         var selectCustomer = new Select(waitSelectCustomer);
         selectCustomer.selectByVisibleText(firstName + " " + lastName);
 
-        var waitSelectCurrency = new WebDriverWait(driver, 10)
+        var waitSelectCurrency = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
         var selectCurrencyForCustomer = new Select(waitSelectCurrency);
         selectCurrencyForCustomer.selectByVisibleText("Dollar");
@@ -106,7 +108,7 @@ public class ManagerLoginPage extends BasePage {
     }
 
     public String confirmAlertOpenAccountAndReturnIdAccount(WebDriver driver) {
-        var waitAlertOpenAccount = new WebDriverWait(driver, 10) //TODO: refactor to two methods
+        var waitAlertOpenAccount = new WebDriverWait(driver, Duration.ofSeconds(10)) //TODO: refactor to two methods
                 .until(ExpectedConditions.alertIsPresent());
         var lengthAlert = waitAlertOpenAccount.getText().length();
         String idAccountNumber = waitAlertOpenAccount.getText().substring(lengthAlert - 4);
