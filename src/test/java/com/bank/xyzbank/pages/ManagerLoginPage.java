@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,16 +15,13 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class ManagerLoginPage {
+public class ManagerLoginPage extends BasePage {
 
     AlertHelper alertHelper;
     WaitHelper waitHelper;
 
-    private final Logger logger = LoggerFactory.getLogger(ManagerLoginPage.class);
-
     public ManagerLoginPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        logger.info("* Create manager login page *");
+        super(driver);
         waitHelper = new WaitHelper(driver);
     }
 
@@ -59,6 +55,15 @@ public class ManagerLoginPage {
     @FindBy(xpath = "//*[text()='Add Customer']")
     private WebElement addCustomerButton;
 
+    @FindBy(css = "input[placeholder='Search Customer']")
+    private WebElement searchInputCustomer;
+
+    @FindBy(css = "td[class='ng-binding']")
+    public WebElement customerLocator;
+
+    @FindBy(xpath = "//*[text()='Process']")
+    public WebElement buttonProcess;
+
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
     }
@@ -80,12 +85,8 @@ public class ManagerLoginPage {
 
     public boolean searchCreatedUser(WebDriver driver, String firstNameOrLastName) {
         buttonCustomers.click();
-        var waitSearchInput = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[placeholder='Search Customer']")));
-        waitSearchInput.clear();
-        waitSearchInput.sendKeys(firstNameOrLastName);
-        var listOfCustomers = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("td[class='ng-binding']")));
+        waitHelper.waitElementClickableWithClearAndSendText(searchInputCustomer, 10, firstNameOrLastName);
+        var listOfCustomers = waitHelper.waitElementsVisibility(customerLocator, 10);
         var foundCustomer = listOfCustomers.parallelStream().filter(listOfCustomer -> firstNameOrLastName.equals(listOfCustomer.getText()))
                 .findAny()
                 .orElse(null); // TODO: check orElse
@@ -95,20 +96,19 @@ public class ManagerLoginPage {
     public void openAccountNumberForCustomer(WebDriver driver, String firstName, String lastName) {
         openAccountButton.click();
         var waitSelectCustomer = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']")));
+                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']"))); //TODO: add helper for select
         var selectCustomer = new Select(waitSelectCustomer);
         selectCustomer.selectByVisibleText(firstName + " " + lastName);
+
         var waitSelectCurrency = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
         var selectCurrencyForCustomer = new Select(waitSelectCurrency);
         selectCurrencyForCustomer.selectByVisibleText("Dollar");
-        var waitButtonProcess = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Process']")));
-        waitButtonProcess.click();
+        waitHelper.waitElementClickableAndClick(buttonProcess, 10);
     }
 
     public String confirmAlertOpenAccountAndReturnIdAccount(WebDriver driver) {
-        var waitAlertOpenAccount = new WebDriverWait(driver, 10)
+        var waitAlertOpenAccount = new WebDriverWait(driver, 10) //TODO: refactor to two methods
                 .until(ExpectedConditions.alertIsPresent());
         var lengthAlert = waitAlertOpenAccount.getText().length();
         String idAccountNumber = waitAlertOpenAccount.getText().substring(lengthAlert - 4);

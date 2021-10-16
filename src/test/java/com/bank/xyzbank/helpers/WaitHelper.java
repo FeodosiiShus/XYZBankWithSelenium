@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,9 +36,13 @@ public class WaitHelper {
         waitElement.click();
     }
 
-    public void waitElementClickableWithClearAndSendText(WebElement element, int timeout, String text){
+    public void waitElementClickableWithClearAndSendText(WebElement element, int timeout, String text) {
         var waitElement = new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(element));
         waitElement.clear();
         waitElement.sendKeys(text);
+    }
+
+    public List<WebElement> waitElementsVisibility(WebElement elementLocator, int timeout){
+        return new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfAllElements(elementLocator));
     }
 }
