@@ -3,15 +3,11 @@ package com.bank.xyzbank.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class MainPage {
+public class HomePage extends BasePage {
 
-    private WebDriver driver;
-
-    public MainPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     @FindBy(css = "button[ng-click='customer()']")
@@ -20,15 +16,16 @@ public class MainPage {
     @FindBy(css = "button[ng-click='manager()']")
     private WebElement managerButton;
 
-    public boolean checkMainPage() {
+    public boolean isHomePage() {
         return customerButton.isDisplayed() && managerButton.isDisplayed();
     }
 
-    public void goToCustomerLoginPage() {
+    public CustomerLoginPage goToCustomerLoginPage() {
         customerButton.click();
+        return new CustomerLoginPage(driver);
     }
 
-    public ManagerLoginPage clickOnManagerLoginPage() {
+    public ManagerLoginPage goToManagerLoginPage() {
         managerButton.click();
         return new ManagerLoginPage(driver);
     }

@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class LoginPage {
+public class CustomerLoginPage {
 
-    public LoginPage(WebDriver driver) {
+    public CustomerLoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 

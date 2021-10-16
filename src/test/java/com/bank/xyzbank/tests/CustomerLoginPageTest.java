@@ -1,6 +1,6 @@
 package com.bank.xyzbank.tests;
 
-import com.bank.xyzbank.pages.LoginPage;
+import com.bank.xyzbank.pages.CustomerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class LoginPageTest {
+public class CustomerLoginPageTest {
 
     private WebDriver webDriver;
 
@@ -28,7 +28,7 @@ public class LoginPageTest {
     @Test
     public void loginWithChooseName() {
         String name = "Harry Potter";
-        var loginPage = new LoginPage(webDriver);
+        var loginPage = new CustomerLoginPage(webDriver);
         webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
         loginPage.chooseLoginNameAndLogin(name);
         assertTrue(loginPage.checkLoginButtonIsDisplayed());
@@ -38,7 +38,7 @@ public class LoginPageTest {
 
     @Test
     public void noLoginWithoutChooseName() {
-        var loginPage = new LoginPage(webDriver);
+        var loginPage = new CustomerLoginPage(webDriver);
         webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
         assertFalse(loginPage.checkLoginButtonIsDisplayed());
     }

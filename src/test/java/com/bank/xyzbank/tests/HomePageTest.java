@@ -1,6 +1,6 @@
 package com.bank.xyzbank.tests;
 
-import com.bank.xyzbank.pages.MainPage;
+import com.bank.xyzbank.pages.HomePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class MainPageTest {
+public class HomePageTest {
 
     private WebDriver driver;
 
@@ -23,12 +23,12 @@ public class MainPageTest {
     }
 
     @Test
-    public void mainPageOpen() throws InterruptedException {
-        var mainPage = new MainPage(driver);
+    public void homePageOpen() {
+        var homePage = new HomePage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-        assertTrue(mainPage.checkMainPage());
-        mainPage.goToCustomerLoginPage();
-        mainPage.clickOnManagerLoginPage();
+        assertTrue(homePage.isHomePage());
+        homePage.goToCustomerLoginPage();
+        homePage.goToManagerLoginPage();
     }
 
     @AfterEach

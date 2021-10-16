@@ -1,8 +1,8 @@
 package com.bank.xyzbank.tests;
 
 import com.bank.xyzbank.pages.CustomerAccountPage;
-import com.bank.xyzbank.pages.LoginPage;
-import com.bank.xyzbank.pages.MainPage;
+import com.bank.xyzbank.pages.CustomerLoginPage;
+import com.bank.xyzbank.pages.HomePage;
 import com.bank.xyzbank.pages.ManagerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,22 +18,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-class ManagerLoginPageTest {
+class ManagerCustomerLoginPageTest {
 
     private WebDriver driver;
 
     ManagerLoginPage managerLoginPage;
-    MainPage mainPage;
-    LoginPage loginPage;
+    HomePage homePage;
+    CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
 
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        mainPage = new MainPage(driver);
+        homePage = new HomePage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-        mainPage.clickOnManagerLoginPage();
+        homePage.goToManagerLoginPage();
     }
 
     @Test
@@ -56,9 +56,9 @@ class ManagerLoginPageTest {
         managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer(driver));
         managerLoginPage.goToHomePage();
-        mainPage.goToCustomerLoginPage();
-        loginPage = new LoginPage(driver);
-        loginPage.chooseLoginNameAndLogin("Test Test");
+        homePage.goToCustomerLoginPage();
+        customerLoginPage = new CustomerLoginPage(driver);
+        customerLoginPage.chooseLoginNameAndLogin("Test Test");
         customerAccountPage = new CustomerAccountPage(driver);
         assertEquals("Test Test", customerAccountPage.getNameOfCurrentAccount());
     }
@@ -71,9 +71,9 @@ class ManagerLoginPageTest {
         managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
         var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount(driver);
         managerLoginPage.goToHomePage();
-        mainPage.goToCustomerLoginPage();
-        loginPage = new LoginPage(driver);
-        loginPage.chooseLoginNameAndLogin("Test Test");
+        homePage.goToCustomerLoginPage();
+        customerLoginPage = new CustomerLoginPage(driver);
+        customerLoginPage.chooseLoginNameAndLogin("Test Test");
         customerAccountPage = new CustomerAccountPage(driver);
         customerAccountPage.chooseAccountNumber(idAccount);
     }

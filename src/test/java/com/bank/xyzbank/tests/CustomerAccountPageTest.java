@@ -1,7 +1,7 @@
 package com.bank.xyzbank.tests;
 
 import com.bank.xyzbank.pages.CustomerAccountPage;
-import com.bank.xyzbank.pages.LoginPage;
+import com.bank.xyzbank.pages.CustomerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,16 +20,16 @@ public class CustomerAccountPageTest {
     WebDriver driver;
     String accountNumber = "1006";
 
-    LoginPage loginPage;
+    CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
 
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        loginPage = new LoginPage(driver);
+        customerLoginPage = new CustomerLoginPage(driver);
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
-        loginPage.chooseLoginNameAndLogin("Harry Potter");
+        customerLoginPage.chooseLoginNameAndLogin("Harry Potter");
         customerAccountPage = new CustomerAccountPage(driver);
     }
 
