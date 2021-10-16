@@ -24,7 +24,7 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = "select[id='accountSelect']")
     private WebElement selectAccountElement; // Select web element to choose account
 
-    @FindBy(css = "div:nth-child(3) > strong:nth-child(1)") // TODO: refactor locator account number
+    @FindBy(css = ".center strong:nth-child(1)")
     private WebElement accountNumberValue; // Account number
 
     @FindBy(xpath = "//strong[contains(text(), 'Rupee')]")
@@ -119,6 +119,14 @@ public class CustomerAccountPage extends BasePage {
 
     public boolean isDisplayedCurrencyRupee() {
         return currencyRupee.isDisplayed();
+    }
+
+    public boolean isDisplayedCurrencyDollar() {
+        return currencyDollar.isDisplayed();
+    }
+
+    public boolean isDisplayedCurrencyPound() {
+        return currencyPound.isDisplayed();
     }
 
     public void backToCustomerTab() {

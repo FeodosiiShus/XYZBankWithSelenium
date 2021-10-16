@@ -19,7 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CustomerAccountPageTest {
 
     WebDriver driver;
-    String accountNumber = "1006";
+    String accountNumberRupee = "1006";
+    String accountNumberDollar = "1004";
+    String accountNumberPound = "1005";
 
     CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
@@ -35,12 +37,24 @@ public class CustomerAccountPageTest {
     }
 
     @Test
-    public void checkAccountNumber() {
-        customerAccountPage.chooseAccountNumber(accountNumber);
+    public void checkAccountNumberRupee() {
+        customerAccountPage.chooseAccountNumber(accountNumberRupee);
         assertTrue(customerAccountPage.isDisplayedCurrencyRupee());
-        //assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyPound));
-        //assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyDollar));
-        assertEquals(customerAccountPage.getAccountNumber(), accountNumber);
+        assertEquals(customerAccountPage.getAccountNumber(), accountNumberRupee);
+    }
+
+    @Test
+    public void checkAccountNumberDollar() {
+        customerAccountPage.chooseAccountNumber(accountNumberDollar);
+        assertTrue(customerAccountPage.isDisplayedCurrencyDollar());
+        assertEquals(customerAccountPage.getAccountNumber(), accountNumberDollar);
+    }
+
+    @Test
+    public void checkAccountNumberPound() {
+        customerAccountPage.chooseAccountNumber(accountNumberPound);
+        assertTrue(customerAccountPage.isDisplayedCurrencyPound());
+        assertEquals(customerAccountPage.getAccountNumber(), accountNumberPound);
     }
 
     @Test
