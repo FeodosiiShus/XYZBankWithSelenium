@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,19 +18,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class CustomerLoginPageTest {
 
-    private WebDriver webDriver;
+    private WebDriver driver;
 
     @BeforeEach
     public void initDriver() {
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
     public void loginWithChooseName() {
         String name = "Harry Potter";
-        var loginPage = new CustomerLoginPage(webDriver);
-        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
+        var loginPage = new CustomerLoginPage(driver);
+        driver.get(PageUrls.LOGIN_CUSTOMER_PAGE);
         loginPage.chooseLoginNameAndLogin(name);
         assertTrue(loginPage.checkLoginButtonIsDisplayed());
         assertTrue(loginPage.checkLoginName(name));
@@ -39,14 +39,14 @@ public class CustomerLoginPageTest {
 
     @Test
     public void noLoginWithoutChooseName() {
-        var loginPage = new CustomerLoginPage(webDriver);
-        webDriver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
+        var loginPage = new CustomerLoginPage(driver);
+        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
         assertFalse(loginPage.checkLoginButtonIsDisplayed());
     }
 
     @AfterEach
     public void closeDriver() {
-        webDriver.quit();
+        driver.quit();
     }
 }
 

@@ -1,9 +1,5 @@
 .idea
 out/
-*.iml
-*.ipr
-.idea/**/gradle.xml
-.idea/**/libraries
 .idea_modules/
 .gradle
 build/

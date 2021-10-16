@@ -1,26 +1,24 @@
 package com.bank.xyzbank.pages;
 
+import com.bank.xyzbank.helpers.SelectHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class CustomerLoginPage {
+public class CustomerLoginPage extends BasePage {
+
+    SelectHelper selectHelper;
 
     public CustomerLoginPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
+        selectHelper = new SelectHelper(driver);
     }
 
     @FindBy(css = "select[id='userSelect']")
-    @CacheLookup
-    WebElement select;
-
-    private Select selectLoginName;
+    private WebElement selectLogin;
 
     @FindBy(xpath = "//*[text() = 'Login']")
     private WebElement loginButton;
@@ -33,8 +31,7 @@ public class CustomerLoginPage {
 
 
     public void chooseLoginNameAndLogin(String name) {
-        selectLoginName = new Select(select);
-        selectLoginName.selectByVisibleText(name);
+        selectHelper.selectByVisibleText(selectLogin, name);
         loginButton.click();
     }
 

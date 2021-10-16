@@ -3,20 +3,14 @@ package com.bank.xyzbank.helpers;
 import com.codeborne.selenide.ex.AlertNotFoundException;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by Kreminskyi A.A. on окт., 2021
  */
-public class AlertHelper {
-
-    private WebDriver driver;
-    private final Logger logger = LoggerFactory.getLogger(AlertHelper.class);
+public class AlertHelper extends BaseHelper {
 
     public AlertHelper(WebDriver driver) {
-        this.driver = driver;
-        logger.info("* Alert helper create *");
+        super(driver);
     }
 
     public Alert getAlert() {

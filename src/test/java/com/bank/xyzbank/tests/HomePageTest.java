@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.HomePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ public class HomePageTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
+        driver.get(PageUrls.HOME_PAGE);
     }
 
     @Test

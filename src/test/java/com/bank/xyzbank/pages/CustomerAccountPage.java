@@ -1,8 +1,10 @@
 package com.bank.xyzbank.pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,29 +14,29 @@ import java.time.Duration;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class CustomerAccountPage {
+public class CustomerAccountPage extends BasePage {
 
     public CustomerAccountPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(css = "select[id='accountSelect']")
     private WebElement selectAccountElement; // Select web element to choose account
 
     @FindBy(css = "div:nth-child(3) > strong:nth-child(1)") // TODO: refactor locator account number
-    public WebElement accountNumberValue; // Account number
+    private WebElement accountNumberValue; // Account number
 
     @FindBy(xpath = "//strong[contains(text(), 'Rupee')]")
-    public WebElement currencyRupee; // Currency in rupee
+    private WebElement currencyRupee; // Currency in rupee
 
     @FindBy(xpath = "//strong[contains(text(), 'Dollar')]")
-    public WebElement currencyDollar; // Currency in dollar
+    private WebElement currencyDollar; // Currency in dollar
 
     @FindBy(xpath = "//strong[contains(text(), 'Pound')]")
-    public WebElement currencyPound; // Currency in pound
+    private WebElement currencyPound; // Currency in pound
 
     @FindBy(xpath = "//div[2]/div/div[2]/strong[2]") // TODO: refactor locator balance value
-    public WebElement balanceValue; // Value of account balance
+    private WebElement balanceValue; // Value of account balance
 
     @FindBy(css = "button[ng-click='deposit()']")
     private WebElement buttonDeposit; // Button for create deposit
@@ -43,13 +45,13 @@ public class CustomerAccountPage {
     private WebElement transactionItem; // Item of transaction list
 
     @FindBy(css = "button[ng-click='transactions()']")
-    public WebElement goToTransactions; // Button goes to page with transactions list
+    private WebElement goToTransactions; // Button goes to page with transactions list
 
     @FindBy(css = "button[ng-click='back()']")
-    public WebElement backToCustomerPageButton; // Button goes to page with customer account
+    private WebElement backToCustomerPageButton; // Button goes to page with customer account
 
     @FindBy(css = "button[ng-click='withdrawl()']")
-    public WebElement withdrawButton; // Button for create withdraw
+    private WebElement withdrawButton; // Button for create withdraw
 
     @FindBy(css = "span[class='fontBig ng-binding']")
     private WebElement nameOfAccount;
@@ -126,6 +128,25 @@ public class CustomerAccountPage {
 
     }
 
+    public String getAccountNumber() {
+        return accountNumberValue.getText();
+    }
+
+    public String getBalanceValue() {
+        return balanceValue.getText();
+    }
+
+    public boolean isDisplayedCurrencyRupee(){
+        return currencyRupee.isDisplayed();
+    }
+
+    public void backToCustomerTab(){
+        backToCustomerPageButton.click();
+    }
+
+    public void goToTransactionTab(){
+        goToTransactions.click();
+    }
     public String getNameOfCurrentAccount() {
         return nameOfAccount.getText();
     }

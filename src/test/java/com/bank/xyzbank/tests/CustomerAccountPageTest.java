@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
 import org.junit.jupiter.api.AfterEach;
@@ -9,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +29,7 @@ public class CustomerAccountPageTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         customerLoginPage = new CustomerLoginPage(driver);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
+        driver.get(PageUrls.LOGIN_CUSTOMER_PAGE);
         customerLoginPage.chooseLoginNameAndLogin("Harry Potter");
         customerAccountPage = new CustomerAccountPage(driver);
     }
@@ -37,28 +37,28 @@ public class CustomerAccountPageTest {
     @Test
     public void checkAccountNumber() {
         customerAccountPage.chooseAccountNumber(accountNumber);
-        assertTrue(customerAccountPage.currencyRupee.isDisplayed());
-        assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyPound));
-        assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyDollar));
-        assertEquals(customerAccountPage.accountNumberValue.getText(), accountNumber);
+        assertTrue(customerAccountPage.isDisplayedCurrencyRupee());
+        //assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyPound));
+        //assertFalse(customerAccountPage.checkWebElementExist(customerAccountPage.currencyDollar));
+        assertEquals(customerAccountPage.getAccountNumber(), accountNumber);
     }
 
     @Test
     public void createDeposit() {
-        String balanceVal = customerAccountPage.balanceValue.getText();
+        String balanceVal = customerAccountPage.getBalanceValue();
         customerAccountPage.createDeposit("100", driver);
-        assertNotEquals(balanceVal, customerAccountPage.balanceValue.getText());
+        assertNotEquals(balanceVal, customerAccountPage.getBalanceValue());
         assertEquals("100", customerAccountPage.currentBalanceValue(driver));
     }
 
     @Test
     public void checkTransactionIsExists() {
-        customerAccountPage.goToTransactions.click();
+        customerAccountPage.goToTransactionTab();
         assertFalse(customerAccountPage.checkTransactionsIsExist());
-        customerAccountPage.backToCustomerPageButton.click();
+        customerAccountPage.backToCustomerTab();
         customerAccountPage.createDeposit("200", driver);
         driver.navigate().refresh();
-        customerAccountPage.goToTransactions.click();
+        customerAccountPage.goToTransactionTab();
         driver.navigate().refresh();
         assertTrue(customerAccountPage.checkTransactionsIsExist());
     }

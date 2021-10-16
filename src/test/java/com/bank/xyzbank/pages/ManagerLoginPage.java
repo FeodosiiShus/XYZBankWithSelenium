@@ -101,9 +101,6 @@ public class ManagerLoginPage extends BasePage {
         var waitSelectCustomer = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']"))); //TODO: add helper for select
         selectHelper.selectByVisibleText(waitSelectCustomer, firstName + " " + lastName);
-        //var selectCustomer = new Select(waitSelectCustomer);
-        //selectCustomer.selectByVisibleText(firstName + " " + lastName);
-
         var waitSelectCurrency = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
         var selectCurrencyForCustomer = new Select(waitSelectCurrency);
