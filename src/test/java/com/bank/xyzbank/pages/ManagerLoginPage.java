@@ -108,12 +108,10 @@ public class ManagerLoginPage extends BasePage {
         waitHelper.waitElementClickableAndClick(buttonProcess, 10);
     }
 
-    public String confirmAlertOpenAccountAndReturnIdAccount(WebDriver driver) {
-        var waitAlertOpenAccount = new WebDriverWait(driver, Duration.ofSeconds(10)) //TODO: refactor to two methods
-                .until(ExpectedConditions.alertIsPresent());
-        var lengthAlert = waitAlertOpenAccount.getText().length();
-        String idAccountNumber = waitAlertOpenAccount.getText().substring(lengthAlert - 4);
-        waitAlertOpenAccount.accept();
+    public String confirmAlertOpenAccountAndReturnIdAccount() {
+        var lengthAlert = alertHelper.getTextInAlert().length();
+        String idAccountNumber = alertHelper.getTextInAlert().substring(lengthAlert - 4);
+        alertHelper.acceptAlertIfPresent();
         return idAccountNumber;
     }
 
