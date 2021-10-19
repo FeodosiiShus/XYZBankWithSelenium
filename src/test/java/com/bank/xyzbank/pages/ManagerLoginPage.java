@@ -3,15 +3,9 @@ package com.bank.xyzbank.pages;
 import com.bank.xyzbank.helpers.AlertHelper;
 import com.bank.xyzbank.helpers.SelectHelper;
 import com.bank.xyzbank.helpers.WaitHelper;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
@@ -63,10 +57,16 @@ public class ManagerLoginPage extends BasePage {
     private WebElement searchInputCustomer;
 
     @FindBy(css = "td[class='ng-binding']")
-    public WebElement customerLocator;
+    private WebElement customerLocator;
 
     @FindBy(xpath = "//*[text()='Process']")
-    public WebElement buttonProcess;
+    private WebElement buttonProcess;
+
+    @FindBy(css = "select[id='userSelect']")
+    private WebElement selectUser;
+
+    @FindBy(css = "select[id='currency']")
+    private WebElement selectCurrency;
 
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
@@ -98,13 +98,8 @@ public class ManagerLoginPage extends BasePage {
 
     public void openAccountNumberForCustomer(WebDriver driver, String firstName, String lastName) {
         openAccountButton.click();
-        var waitSelectCustomer = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='userSelect']"))); //TODO: add helper for select
-        selectHelper.selectByVisibleText(waitSelectCustomer, firstName + " " + lastName);
-        var waitSelectCurrency = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[id='currency']")));
-        var selectCurrencyForCustomer = new Select(waitSelectCurrency);
-        selectCurrencyForCustomer.selectByVisibleText("Dollar");
+        selectHelper.selectByVisibleText(selectUser, firstName + " " + lastName);
+        selectHelper.selectByVisibleText(selectCurrency, "Dollar");
         waitHelper.waitElementClickableAndClick(buttonProcess, 10);
     }
 

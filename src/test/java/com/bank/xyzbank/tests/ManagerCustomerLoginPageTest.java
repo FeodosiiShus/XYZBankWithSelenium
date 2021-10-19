@@ -5,6 +5,7 @@ import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
 import com.bank.xyzbank.pages.HomePage;
 import com.bank.xyzbank.pages.ManagerLoginPage;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,10 @@ class ManagerCustomerLoginPageTest {
     CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
 
+
     @BeforeEach
     public void initDriver() {
+        ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
@@ -48,7 +51,7 @@ class ManagerCustomerLoginPageTest {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        assertTrue(managerLoginPage.searchCreatedUser( "Test"));
+        assertTrue(managerLoginPage.searchCreatedUser("Test"));
     }
 
     @Test
@@ -84,7 +87,7 @@ class ManagerCustomerLoginPageTest {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        assertTrue(managerLoginPage.searchCreatedUser( "Test"));
+        assertTrue(managerLoginPage.searchCreatedUser("Test"));
         managerLoginPage.deleteCustomer();
     }
 
