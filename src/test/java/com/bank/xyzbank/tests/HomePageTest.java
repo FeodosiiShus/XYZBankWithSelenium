@@ -2,6 +2,7 @@ package com.bank.xyzbank.tests;
 
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.HomePage;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ public class HomePageTest {
 
     @BeforeEach
     public void initDriver() {
+        ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);

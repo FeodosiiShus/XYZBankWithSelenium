@@ -17,7 +17,7 @@ public class WaitHelper extends BaseHelper {
         super(driver);
     }
 
-    public void setImplicitlyWait(long timeout) {
+    public void waitOpenPage(long timeout) {
         logger.info("* start implicitly wait *");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
     }

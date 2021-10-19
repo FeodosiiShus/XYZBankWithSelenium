@@ -17,15 +17,18 @@ public class HomePage extends BasePage {
     private WebElement managerButton;
 
     public boolean isHomePage() {
+        logger.info("* Check is home page method *");
         return customerButton.isDisplayed() && managerButton.isDisplayed();
     }
 
     public CustomerLoginPage goToCustomerLoginPage() {
+        logger.info("* Go to customer login page method *");
         customerButton.click();
         return new CustomerLoginPage(driver);
     }
 
     public ManagerLoginPage goToManagerLoginPage() {
+        logger.info("* Go to manager login page method *");
         managerButton.click();
         return new ManagerLoginPage(driver);
     }

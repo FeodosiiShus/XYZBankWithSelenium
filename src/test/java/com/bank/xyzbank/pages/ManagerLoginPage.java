@@ -1,26 +1,18 @@
 package com.bank.xyzbank.pages;
 
-import com.bank.xyzbank.helpers.AlertHelper;
-import com.bank.xyzbank.helpers.SelectHelper;
-import com.bank.xyzbank.helpers.WaitHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
 public class ManagerLoginPage extends BasePage {
 
-    AlertHelper alertHelper;
-    WaitHelper waitHelper;
-    SelectHelper selectHelper;
-
     public ManagerLoginPage(WebDriver driver) {
         super(driver);
-        waitHelper = new WaitHelper(driver);
-        selectHelper = new SelectHelper(driver);
-        alertHelper = new AlertHelper(driver);
     }
 
     @FindBy(css = "button[ng-class='btnClass1']")
@@ -69,10 +61,12 @@ public class ManagerLoginPage extends BasePage {
     private WebElement selectCurrency;
 
     public boolean checkManagerLoginPage() { // TODO: Refactor to some elements or function for check
+        logger.info("* Check buttons is displayed *");
         return buttonAddCustomer.isDisplayed() && buttonOpenAccount.isDisplayed() && buttonCustomers.isDisplayed();
     }
 
     public void createNewCustomer(String firstName, String lastName, String postCode) {
+        logger.info("* Create new customer method *");
         buttonAddCustomer.click();
         waitHelper.waitElementClickableWithClearAndSendText(inputFirstName, 10, firstName);
         waitHelper.waitElementClickableWithClearAndSendText(inputLastName, 10, lastName);
@@ -81,22 +75,26 @@ public class ManagerLoginPage extends BasePage {
     }
 
     public boolean acceptAlertCreateCustomer() {
+        logger.info("* Accept alert create customer *");
         boolean checkAlert = alertHelper.getTextInAlert().contains("Customer added successfully");
         alertHelper.acceptAlertIfPresent();
         return checkAlert;
     }
 
     public boolean searchCreatedUser(String firstNameOrLastName) {
+        logger.info("* Search created user *");
         buttonCustomers.click();
         waitHelper.waitElementClickableWithClearAndSendText(searchInputCustomer, 10, firstNameOrLastName);
-        var listOfCustomers = waitHelper.waitElementsVisibility(customerLocator, 10);
-        var foundCustomer = listOfCustomers.parallelStream().filter(listOfCustomer -> firstNameOrLastName.equals(listOfCustomer.getText()))
+        var foundCustomer = waitHelper.waitElementsVisibility(customerLocator, 10)
+                .stream()
+                .filter(listOfCustomers -> firstNameOrLastName.equals(listOfCustomers.getText()))
                 .findAny()
-                .orElse(null); // TODO: check orElse
+                .orElse(null);
         return foundCustomer != null;
     }
 
-    public void openAccountNumberForCustomer(WebDriver driver, String firstName, String lastName) {
+    public void openAccountNumberForCustomer(String firstName, String lastName) {
+        logger.info("* Open account number for customer *");
         openAccountButton.click();
         selectHelper.selectByVisibleText(selectUser, firstName + " " + lastName);
         selectHelper.selectByVisibleText(selectCurrency, "Dollar");
@@ -104,6 +102,7 @@ public class ManagerLoginPage extends BasePage {
     }
 
     public String confirmAlertOpenAccountAndReturnIdAccount() {
+        logger.info("* Confirm alert open account number and return id account *");
         var lengthAlert = alertHelper.getTextInAlert().length();
         String idAccountNumber = alertHelper.getTextInAlert().substring(lengthAlert - 4);
         alertHelper.acceptAlertIfPresent();
@@ -111,10 +110,12 @@ public class ManagerLoginPage extends BasePage {
     }
 
     public void deleteCustomer() {
+        logger.info("* Delete customer *");
         waitHelper.waitElementClickable(deleteButton, 10).click();
     }
 
     public void goToHomePage() {
+        logger.info("* Go to home page *");
         homeButton.click();
     }
 

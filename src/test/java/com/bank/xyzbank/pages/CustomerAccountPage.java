@@ -1,7 +1,5 @@
 package com.bank.xyzbank.pages;
 
-import com.bank.xyzbank.helpers.SelectHelper;
-import com.bank.xyzbank.helpers.WaitHelper;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,13 +10,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class CustomerAccountPage extends BasePage {
 
-    WaitHelper waitHelper;
-    SelectHelper selectHelper;
-
     public CustomerAccountPage(WebDriver driver) {
         super(driver);
-        waitHelper = new WaitHelper(driver);
-        selectHelper = new SelectHelper(driver);
     }
 
     @FindBy(css = "select[id='accountSelect']")
@@ -74,6 +67,7 @@ public class CustomerAccountPage extends BasePage {
      * Choose account by number
      */
     public void chooseAccountNumber(String number) {
+        logger.info("* Choose account number *");
         selectHelper.selectByVisibleText(selectAccountElement, number);
     }
 
@@ -81,6 +75,7 @@ public class CustomerAccountPage extends BasePage {
      * Create deposit with waiting input and button element
      */
     public void createDeposit(String depositValue) {
+        logger.info("* Create deposit *");
         buttonDeposit.click();
         waitHelper.waitElementClickableWithClearAndSendText(insertDeposit, 10, depositValue);
         waitHelper.waitElementClickableAndClick(buttonConfirmDeposit, 10);
@@ -90,6 +85,7 @@ public class CustomerAccountPage extends BasePage {
      * Check current balance value
      */
     public String currentBalanceValue() {
+        logger.info("* Return current balance value *");
         return waitHelper.waitElementClickable(balanceValue, 10).getText();
     }
 
@@ -97,6 +93,7 @@ public class CustomerAccountPage extends BasePage {
      * Check transaction exist by present element on page
      */
     public boolean checkTransactionsIsExist() {
+        logger.info("* Check transactions is exist *");
         try {
             return transactionItem.isDisplayed();
         } catch (NoSuchElementException exception) {
@@ -108,36 +105,44 @@ public class CustomerAccountPage extends BasePage {
      * Create withdraw with waiting input and button element
      */
     public void createWithdraw(String withdrawValue) {
+        logger.info("* Create withdraw *");
         withdrawButton.click();
         waitHelper.waitElementClickableWithClearAndSendText(inputWithdraw, 10, withdrawValue);
         waitHelper.waitElementClickableAndClick(buttonConfirmWithdraw, 10);
     }
 
     public String getAccountNumber() {
+        logger.info("* Get account number *");
         return accountNumberValue.getText();
     }
 
     public boolean isDisplayedCurrencyRupee() {
+        logger.info("* Check currency rupee is displayed *");
         return currencyRupee.isDisplayed();
     }
 
     public boolean isDisplayedCurrencyDollar() {
+        logger.info("* Check currency dollar is displayed *");
         return currencyDollar.isDisplayed();
     }
 
     public boolean isDisplayedCurrencyPound() {
+        logger.info("* Check currency pound is displayed *");
         return currencyPound.isDisplayed();
     }
 
-    public void backToCustomerTab() {
+    public void goToCustomerTab() {
+        logger.info("* Go to customer tab *");
         backToCustomerPageButton.click();
     }
 
     public void goToTransactionTab() {
+        logger.info("* Go to transaction tab *");
         goToTransactions.click();
     }
 
     public String getNameOfCurrentAccount() {
+        logger.info("* Get name of current account *");
         return nameOfAccount.getText();
     }
 }

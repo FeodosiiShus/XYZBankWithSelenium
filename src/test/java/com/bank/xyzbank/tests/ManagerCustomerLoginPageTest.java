@@ -72,7 +72,7 @@ class ManagerCustomerLoginPageTest {
         managerLoginPage = new ManagerLoginPage(driver);
         managerLoginPage.createNewCustomer("Test", "Test", "100");
         assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        managerLoginPage.openAccountNumberForCustomer(driver, "Test", "Test");
+        managerLoginPage.openAccountNumberForCustomer("Test", "Test");
         var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount();
         managerLoginPage.goToHomePage();
         homePage.goToCustomerLoginPage();
