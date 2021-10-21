@@ -18,30 +18,30 @@ public class WaitHelper extends BaseHelper {
     }
 
     public void waitOpenPage(long timeout) {
-        logger.info("* start implicitly wait *");
+        logger.info("* Start implicitly wait *");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
     }
 
     public WebElement waitElementClickable(WebElement element, long timeout) {
-        logger.info("* wait element to be clickable *");
+        logger.info("* Wait element to be clickable *");
         return new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitElementClickableAndClick(WebElement element, int timeout) {
-        logger.info("* wait element to be clickable and click *");
+        logger.info("* Wait element to be clickable and click *");
         var waitElement = new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.elementToBeClickable(element));
         waitElement.click();
     }
 
     public void waitElementClickableWithClearAndSendText(WebElement element, int timeout, String text) {
-        logger.info("* wait element to be clickable, clear field and insert text *");
+        logger.info("* Wait element to be clickable, clear field and insert text *");
         var waitElement = new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.elementToBeClickable(element));
         waitElement.clear();
         waitElement.sendKeys(text);
     }
 
     public List<WebElement> waitElementsVisibility(WebElement elementLocator, int timeout) {
-        logger.info("* wait element to be visibility *");
+        logger.info("* Wait element to be visibility *");
         return new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.visibilityOfAllElements(elementLocator));
     }
 }

@@ -1,5 +1,6 @@
 package com.bank.xyzbank.pages;
 
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,6 +63,11 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = "form .btn-default")
     private WebElement buttonConfirmWithdraw;
 
+    @FindBy(css = ".error")
+    private WebElement errorMessage;
+
+    @FindBy(css = "button[ng-click='reset()']")
+    private WebElement resetTransactionButton;
 
     /**
      * Choose account by number
@@ -144,5 +150,23 @@ public class CustomerAccountPage extends BasePage {
     public String getNameOfCurrentAccount() {
         logger.info("* Get name of current account *");
         return nameOfAccount.getText();
+    }
+
+    public String getErrorMessageWithdraw(){
+        return errorMessage.getText();
+    }
+
+    public boolean isErrorMessageDisplayed(){
+        return errorMessage.isDisplayed();
+    }
+
+    public void deleteAllTransactions(){
+        try {
+            resetTransactionButton.click();
+            logger.info("* All transactions delete successfully *");
+        }
+        catch (ElementNotInteractableException exception){
+            logger.info("* Element not found on page: " + exception.getStackTrace() + " *");
+        }
     }
 }

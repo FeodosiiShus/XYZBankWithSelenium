@@ -9,7 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,17 +24,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CustomerAccountPageTest {
 
     WebDriver driver;
-    String accountNumberRupee = "1006";
-    String accountNumberDollar = "1004";
-    String accountNumberPound = "1005";
+    static final String accountNumberRupee = "1006";
+    static final String accountNumberDollar = "1004";
+    static final String accountNumberPound = "1005";
+    static final String errorMessageWithdraw = "Transaction Failed. You can not withdraw amount more than the balance.";
 
     CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
 
     @BeforeEach
-    public void initDriver() {
+    public void initDriver() throws MalformedURLException {
+        //ChromeOptions options = new ChromeOptions();
+        //driver = new RemoteWebDriver(new URL("http://localhost:4444"), options);
+
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
+        driver.get(PageUrls.HOME_PAGE);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         customerLoginPage = new CustomerLoginPage(driver);
         driver.get(PageUrls.LOGIN_CUSTOMER_PAGE);
@@ -85,6 +94,16 @@ public class CustomerAccountPageTest {
         driver.navigate().refresh();
         customerAccountPage.createWithdraw("200");
         assertEquals("0", customerAccountPage.currentBalanceValue());
+    }
+
+    @Test
+    void createWithdrawWithZeroBalance() {
+        customerAccountPage.goToTransactionTab();
+        customerAccountPage.deleteAllTransactions();
+        customerAccountPage.goToCustomerTab();
+        customerAccountPage.createWithdraw("100");
+        assertTrue(customerAccountPage.isErrorMessageDisplayed());
+        assertEquals(customerAccountPage.getErrorMessageWithdraw(), errorMessageWithdraw);
     }
 
     @AfterEach
