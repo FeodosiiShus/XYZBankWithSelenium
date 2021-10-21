@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
@@ -23,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ManagerCustomerLoginPageTest {
 
     private WebDriver driver;
+    PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
     ManagerLoginPage managerLoginPage;
     HomePage homePage;
@@ -36,7 +38,7 @@ class ManagerCustomerLoginPageTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
-        driver.get(PageUrls.HOME_PAGE);
+        driver.get(urls.homePage());
         homePage.goToManagerLoginPage();
     }
 

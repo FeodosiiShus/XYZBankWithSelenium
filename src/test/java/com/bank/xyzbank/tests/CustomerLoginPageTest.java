@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerLoginPage;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
@@ -20,11 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CustomerLoginPageTest {
 
     private WebDriver driver;
+    PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
     @BeforeEach
     public void initDriver() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
+        driver.get(urls.customerLoginPage());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
@@ -32,7 +35,6 @@ public class CustomerLoginPageTest {
     public void loginWithChooseName() {
         String name = "Harry Potter";
         var loginPage = new CustomerLoginPage(driver);
-        driver.get(PageUrls.LOGIN_CUSTOMER_PAGE);
         loginPage.chooseLoginNameAndLogin(name);
         assertTrue(loginPage.checkLoginButtonIsDisplayed());
         assertTrue(loginPage.checkLoginName(name));

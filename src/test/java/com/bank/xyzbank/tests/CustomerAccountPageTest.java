@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
@@ -9,11 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CustomerAccountPageTest {
 
     WebDriver driver;
+    PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
     static final String accountNumberRupee = "1006";
     static final String accountNumberDollar = "1004";
     static final String accountNumberPound = "1005";
@@ -39,10 +38,10 @@ public class CustomerAccountPageTest {
 
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
-        driver.get(PageUrls.HOME_PAGE);
+        driver.get(urls.homePage());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         customerLoginPage = new CustomerLoginPage(driver);
-        driver.get(PageUrls.LOGIN_CUSTOMER_PAGE);
+        driver.get(urls.customerLoginPage());
         customerLoginPage.chooseLoginNameAndLogin("Harry Potter");
         customerAccountPage = new CustomerAccountPage(driver);
     }

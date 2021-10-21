@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.HomePage;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
@@ -10,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,6 +19,7 @@ public class HomePageTest {
 
     private WebDriver driver;
     private HomePage homePage;
+    PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
     @BeforeEach
     public void initDriver() {
@@ -26,7 +27,7 @@ public class HomePageTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
-        driver.get(PageUrls.HOME_PAGE);
+        driver.get(urls.homePage());
     }
 
     @Test
