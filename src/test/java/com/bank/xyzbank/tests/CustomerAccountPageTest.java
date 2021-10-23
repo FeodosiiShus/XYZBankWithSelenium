@@ -1,17 +1,15 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.Browsers;
 import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.net.MalformedURLException;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +21,7 @@ public class CustomerAccountPageTest {
 
     WebDriver driver;
     PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
+
     static final String accountNumberRupee = "1006";
     static final String accountNumberDollar = "1004";
     static final String accountNumberPound = "1005";
@@ -32,12 +31,8 @@ public class CustomerAccountPageTest {
     CustomerAccountPage customerAccountPage;
 
     @BeforeEach
-    public void initDriver() throws MalformedURLException {
-        //ChromeOptions options = new ChromeOptions();
-        //driver = new RemoteWebDriver(new URL("http://localhost:4444"), options);
-
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+    public void initDriver() {
+        driver = Browsers.CHROME_DOCKER.create();
         driver.get(urls.homePage());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         customerLoginPage = new CustomerLoginPage(driver);

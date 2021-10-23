@@ -1,5 +1,6 @@
 package com.bank.xyzbank.tests;
 
+import com.bank.xyzbank.factories.Browsers;
 import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.HomePage;
@@ -23,8 +24,7 @@ public class HomePageTest {
 
     @BeforeEach
     public void initDriver() {
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        driver = Browsers.CHROME_DOCKER.create();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
         driver.get(urls.homePage());
