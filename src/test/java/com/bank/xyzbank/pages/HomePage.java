@@ -27,9 +27,9 @@ public class HomePage extends BasePage {
         return new CustomerLoginPage(driver);
     }
 
-    public ManagerLoginPage goToManagerLoginPage() {
+    public ManagerAccountPage goToManagerAccountPage() {
         logger.info("* Go to manager login page method *");
         managerButton.click();
-        return new ManagerLoginPage(driver);
+        return new ManagerAccountPage(driver);
     }
 }

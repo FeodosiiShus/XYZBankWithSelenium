@@ -5,9 +5,12 @@ import com.bank.xyzbank.factories.ConfigFactory;
 import com.bank.xyzbank.helpers.ImplicitlyWaitHelper;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerLoginPage;
+import com.bank.xyzbank.pages.HomePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,28 +24,30 @@ public class CustomerLoginPageTest {
     private WebDriver driver;
     PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
+    HomePage homePage;
+    CustomerLoginPage customerLoginPage;
+
     @BeforeEach
     public void initDriver() {
         driver = Browsers.CHROME_DOCKER.create();
-        driver.get(urls.customerLoginPage());
+        homePage = new HomePage(driver);
+        driver.get(urls.homePage());
         ImplicitlyWaitHelper.waitPage(driver, 10);
+        customerLoginPage = homePage.goToCustomerLoginPage();
     }
 
-    @Test
-    public void loginWithChooseName() {
-        String name = "Harry Potter";
-        var loginPage = new CustomerLoginPage(driver);
-        loginPage.chooseLoginNameAndLogin(name);
-        assertTrue(loginPage.checkLoginButtonIsDisplayed());
-        assertTrue(loginPage.checkLoginName(name));
-        loginPage.logout();
+    @ParameterizedTest
+    @ValueSource(strings = {"Hermoine Granger", "Harry Potter", "Ron Weasly", "Albus Dumbledore", "Neville Longbottom"})
+    public void loginWithChooseName(String name) {
+        customerLoginPage.chooseLoginNameAndLogin(name);
+        assertTrue(customerLoginPage.checkLoginButtonIsDisplayed());
+        assertTrue(customerLoginPage.checkLoginName(name));
+        customerLoginPage.logout();
     }
 
     @Test
     public void noLoginWithoutChooseName() {
-        var loginPage = new CustomerLoginPage(driver);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/customer");
-        assertFalse(loginPage.checkLoginButtonIsDisplayed());
+        assertFalse(customerLoginPage.checkLoginButtonIsDisplayed());
     }
 
     @AfterEach

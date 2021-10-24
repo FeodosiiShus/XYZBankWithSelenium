@@ -26,10 +26,11 @@ public class CustomerLoginPage extends BasePage {
     private WebElement logoutButton;
 
 
-    public void chooseLoginNameAndLogin(String name) {
+    public CustomerAccountPage chooseLoginNameAndLogin(String name) {
         logger.info("* Choose login name and click log in *");
         selectHelper.selectByVisibleText(selectLogin, name);
         loginButton.click();
+        return new CustomerAccountPage(driver);
     }
 
     public boolean checkLoginButtonIsDisplayed() {

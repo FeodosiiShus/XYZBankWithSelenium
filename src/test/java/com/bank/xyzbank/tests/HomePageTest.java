@@ -41,7 +41,7 @@ public class HomePageTest {
     @Test
     public void openHomePageGoToManagerLoginPage() {
         assertTrue(homePage.isHomePage());
-        homePage.goToManagerLoginPage();
+        homePage.goToManagerAccountPage();
     }
 
     @AfterEach

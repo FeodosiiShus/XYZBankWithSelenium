@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-public class ManagerLoginPage extends BasePage {
+public class ManagerAccountPage extends BasePage {
 
-    public ManagerLoginPage(WebDriver driver) {
+    public ManagerAccountPage(WebDriver driver) {
         super(driver);
     }
 

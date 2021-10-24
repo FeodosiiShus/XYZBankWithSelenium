@@ -14,7 +14,7 @@ public class SelectHelper extends BaseHelper {
     }
 
     public void selectByVisibleText(WebElement element, String text){
-        logger.info("* select value by visible text *");
+        logger.info("* Select value by visible text *");
         var select = new Select(element);
         select.selectByVisibleText(text);
     }

@@ -11,7 +11,4 @@ public interface PageUrls {
 
     @Key("home")
     String homePage();
-
-    @Key("login.customer")
-    String customerLoginPage();
 }

@@ -7,7 +7,7 @@ import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
 import com.bank.xyzbank.pages.HomePage;
-import com.bank.xyzbank.pages.ManagerLoginPage;
+import com.bank.xyzbank.pages.ManagerAccountPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,12 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by Kreminskyi A.A. on авг., 2021
  */
-class ManagerCustomerLoginPageTest {
+class ManagerAccountPageTest {
 
     private WebDriver driver;
     PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
-    ManagerLoginPage managerLoginPage;
+    ManagerAccountPage managerAccountPage;
     HomePage homePage;
     CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
@@ -36,29 +36,26 @@ class ManagerCustomerLoginPageTest {
         ImplicitlyWaitHelper.waitPage(driver, 10);
         homePage = new HomePage(driver);
         driver.get(urls.homePage());
-        homePage.goToManagerLoginPage();
+        managerAccountPage = homePage.goToManagerAccountPage();
     }
 
     @Test
     public void checkManagerLoginPageIsOpen() {
-        managerLoginPage = new ManagerLoginPage(driver);
-        assertTrue(managerLoginPage.checkManagerLoginPage());
+        assertTrue(managerAccountPage.checkManagerLoginPage());
     }
 
     @Test
     public void createNewCustomerAndCheckInCustomers() {
-        managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        assertTrue(managerLoginPage.searchCreatedUser("Test"));
+        managerAccountPage.createNewCustomer("Test", "Test", "100");
+        assertTrue(managerAccountPage.acceptAlertCreateCustomer());
+        assertTrue(managerAccountPage.searchCreatedUser("Test"));
     }
 
     @Test
     public void createNewCustomerAndCheckInCustomerPage() {
-        managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        managerLoginPage.goToHomePage();
+        managerAccountPage.createNewCustomer("Test", "Test", "100");
+        assertTrue(managerAccountPage.acceptAlertCreateCustomer());
+        managerAccountPage.goToHomePage();
         homePage.goToCustomerLoginPage();
         customerLoginPage = new CustomerLoginPage(driver);
         customerLoginPage.chooseLoginNameAndLogin("Test Test");
@@ -68,12 +65,11 @@ class ManagerCustomerLoginPageTest {
 
     @Test
     public void createNewCustomerAndOpenAccountForHim() {
-        managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        managerLoginPage.openAccountNumberForCustomer("Test", "Test");
-        var idAccount = managerLoginPage.confirmAlertOpenAccountAndReturnIdAccount();
-        managerLoginPage.goToHomePage();
+        managerAccountPage.createNewCustomer("Test", "Test", "100");
+        assertTrue(managerAccountPage.acceptAlertCreateCustomer());
+        managerAccountPage.openAccountNumberForCustomer("Test", "Test");
+        var idAccount = managerAccountPage.confirmAlertOpenAccountAndReturnIdAccount();
+        managerAccountPage.goToHomePage();
         homePage.goToCustomerLoginPage();
         customerLoginPage = new CustomerLoginPage(driver);
         customerLoginPage.chooseLoginNameAndLogin("Test Test");
@@ -83,11 +79,10 @@ class ManagerCustomerLoginPageTest {
 
     @Test
     public void createNewCustomerAndDelete() {
-        managerLoginPage = new ManagerLoginPage(driver);
-        managerLoginPage.createNewCustomer("Test", "Test", "100");
-        assertTrue(managerLoginPage.acceptAlertCreateCustomer());
-        assertTrue(managerLoginPage.searchCreatedUser("Test"));
-        managerLoginPage.deleteCustomer();
+        managerAccountPage.createNewCustomer("Test", "Test", "100");
+        assertTrue(managerAccountPage.acceptAlertCreateCustomer());
+        assertTrue(managerAccountPage.searchCreatedUser("Test"));
+        managerAccountPage.deleteCustomer();
     }
 
     @AfterEach

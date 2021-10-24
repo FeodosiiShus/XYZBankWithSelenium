@@ -6,6 +6,7 @@ import com.bank.xyzbank.helpers.ImplicitlyWaitHelper;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
+import com.bank.xyzbank.pages.HomePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,20 +26,21 @@ public class CustomerAccountPageTest {
     WebDriver driver;
     PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
+    static final String accountName = "Harry Potter";
     static final String errorMessageWithdraw = "Transaction Failed. You can not withdraw amount more than the balance.";
 
+    HomePage homePage;
     CustomerLoginPage customerLoginPage;
     CustomerAccountPage customerAccountPage;
 
     @BeforeEach
     public void initDriver() {
         driver = Browsers.CHROME_DOCKER.create();
+        homePage = new HomePage(driver);
         driver.get(urls.homePage());
         ImplicitlyWaitHelper.waitPage(driver, 10);
-        customerLoginPage = new CustomerLoginPage(driver);
-        driver.get(urls.customerLoginPage());
-        customerLoginPage.chooseLoginNameAndLogin("Harry Potter");
-        customerAccountPage = new CustomerAccountPage(driver);
+        customerLoginPage = homePage.goToCustomerLoginPage();
+        customerAccountPage = customerLoginPage.chooseLoginNameAndLogin(accountName);
     }
 
     @ParameterizedTest
