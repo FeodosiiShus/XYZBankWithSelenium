@@ -21,15 +21,6 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = ".center strong:nth-child(1)")
     private WebElement accountNumberValue; // Account number
 
-    @FindBy(xpath = "//strong[contains(text(), 'Rupee')]")
-    private WebElement currencyRupee; // Currency in rupee
-
-    @FindBy(xpath = "//strong[contains(text(), 'Dollar')]")
-    private WebElement currencyDollar; // Currency in dollar
-
-    @FindBy(xpath = "//strong[contains(text(), 'Pound')]")
-    private WebElement currencyPound; // Currency in pound
-
     @FindBy(css = ".center strong:nth-child(2)")
     private WebElement balanceValue;
 
@@ -122,21 +113,6 @@ public class CustomerAccountPage extends BasePage {
         return accountNumberValue.getText();
     }
 
-    public boolean isDisplayedCurrencyRupee() {
-        logger.info("* Check currency rupee is displayed *");
-        return currencyRupee.isDisplayed();
-    }
-
-    public boolean isDisplayedCurrencyDollar() {
-        logger.info("* Check currency dollar is displayed *");
-        return currencyDollar.isDisplayed();
-    }
-
-    public boolean isDisplayedCurrencyPound() {
-        logger.info("* Check currency pound is displayed *");
-        return currencyPound.isDisplayed();
-    }
-
     public void goToCustomerTab() {
         logger.info("* Go to customer tab *");
         backToCustomerPageButton.click();
@@ -152,20 +128,19 @@ public class CustomerAccountPage extends BasePage {
         return nameOfAccount.getText();
     }
 
-    public String getErrorMessageWithdraw(){
+    public String getErrorMessageWithdraw() {
         return errorMessage.getText();
     }
 
-    public boolean isErrorMessageDisplayed(){
+    public boolean isErrorMessageDisplayed() {
         return errorMessage.isDisplayed();
     }
 
-    public void deleteAllTransactions(){
+    public void deleteAllTransactions() {
         try {
             resetTransactionButton.click();
             logger.info("* All transactions delete successfully *");
-        }
-        catch (ElementNotInteractableException exception){
+        } catch (ElementNotInteractableException exception) {
             logger.info("* Element not found on page: " + exception.getStackTrace() + " *");
         }
     }

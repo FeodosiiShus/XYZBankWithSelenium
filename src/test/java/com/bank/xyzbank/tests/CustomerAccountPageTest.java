@@ -8,6 +8,8 @@ import com.bank.xyzbank.pages.CustomerLoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -22,9 +24,6 @@ public class CustomerAccountPageTest {
     WebDriver driver;
     PageUrls urls = ConfigFactory.createConfig(PageUrls.class);
 
-    static final String accountNumberRupee = "1006";
-    static final String accountNumberDollar = "1004";
-    static final String accountNumberPound = "1005";
     static final String errorMessageWithdraw = "Transaction Failed. You can not withdraw amount more than the balance.";
 
     CustomerLoginPage customerLoginPage;
@@ -41,25 +40,11 @@ public class CustomerAccountPageTest {
         customerAccountPage = new CustomerAccountPage(driver);
     }
 
-    @Test
-    public void checkAccountNumberRupee() {
-        customerAccountPage.chooseAccountNumber(accountNumberRupee);
-        assertTrue(customerAccountPage.isDisplayedCurrencyRupee());
-        assertEquals(customerAccountPage.getAccountNumber(), accountNumberRupee);
-    }
-
-    @Test
-    public void checkAccountNumberDollar() {
-        customerAccountPage.chooseAccountNumber(accountNumberDollar);
-        assertTrue(customerAccountPage.isDisplayedCurrencyDollar());
-        assertEquals(customerAccountPage.getAccountNumber(), accountNumberDollar);
-    }
-
-    @Test
-    public void checkAccountNumberPound() {
-        customerAccountPage.chooseAccountNumber(accountNumberPound);
-        assertTrue(customerAccountPage.isDisplayedCurrencyPound());
-        assertEquals(customerAccountPage.getAccountNumber(), accountNumberPound);
+    @ParameterizedTest
+    @ValueSource(strings = {"1004", "1005", "1006"})
+    void checkAccountNumber(String accountNumber) {
+        customerAccountPage.chooseAccountNumber(accountNumber);
+        assertEquals(customerAccountPage.getAccountNumber(), accountNumber);
     }
 
     @Test
