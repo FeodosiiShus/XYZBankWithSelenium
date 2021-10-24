@@ -39,10 +39,9 @@ public class CustomerLoginPageTest {
     @ParameterizedTest
     @ValueSource(strings = {"Hermoine Granger", "Harry Potter", "Ron Weasly", "Albus Dumbledore", "Neville Longbottom"})
     public void loginWithChooseName(String name) {
-        customerLoginPage.chooseLoginNameAndLogin(name);
+        customerLoginPage.chooseLoginName(name);
         assertTrue(customerLoginPage.checkLoginButtonIsDisplayed());
-        assertTrue(customerLoginPage.checkLoginName(name));
-        customerLoginPage.logout();
+        assertTrue(customerLoginPage.checkLoginNameIsExist(name));
     }
 
     @Test

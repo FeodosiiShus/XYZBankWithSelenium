@@ -60,6 +60,9 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = "button[ng-click='reset()']")
     private WebElement resetTransactionButton;
 
+    @FindBy(xpath = "//*[text()='Deposit Successful']")
+    private WebElement depositSuccessful;
+
     /**
      * Choose account by number
      */
@@ -134,6 +137,10 @@ public class CustomerAccountPage extends BasePage {
 
     public boolean isErrorMessageDisplayed() {
         return errorMessage.isDisplayed();
+    }
+
+    public boolean isDepositSuccessful() {
+        return waitHelper.waitElementClickable(depositSuccessful, 10).isDisplayed();
     }
 
     public void deleteAllTransactions() {

@@ -1,5 +1,6 @@
 package com.bank.xyzbank.pages;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,13 +20,6 @@ public class CustomerLoginPage extends BasePage {
     @FindBy(xpath = "//*[text() = 'Login']")
     private WebElement loginButton;
 
-    @FindBy(css = "span[class='fontBig ng-binding']")
-    private WebElement loginName;
-
-    @FindBy(css = "button[class='btn logout']")
-    private WebElement logoutButton;
-
-
     public CustomerAccountPage chooseLoginNameAndLogin(String name) {
         logger.info("* Choose login name and click log in *");
         selectHelper.selectByVisibleText(selectLogin, name);
@@ -33,18 +27,24 @@ public class CustomerLoginPage extends BasePage {
         return new CustomerAccountPage(driver);
     }
 
+    public void chooseLoginName(String name) {
+        logger.info("* Choose login name *");
+        selectHelper.selectByVisibleText(selectLogin, name);
+    }
+
     public boolean checkLoginButtonIsDisplayed() {
         logger.info("* Check login button is displayed *");
         return loginButton.isDisplayed();
     }
 
-    public boolean checkLoginName(String name) {
-        logger.info("* Check login name equals attribute name *");
-        return loginName.getText().equals(name);
-    }
-
-    public void logout() {
-        logger.info("* Logout button click *");
-        logoutButton.click();
+    public boolean checkLoginNameIsExist(String name) {
+        logger.info("* Check login name exist in select element *");
+        try {
+            selectHelper.selectByVisibleText(selectLogin, name);
+            return true;
+        } catch (StaleElementReferenceException exception) {
+            logger.info("! No such element exception: " + exception.getMessage());
+            return false;
+        }
     }
 }

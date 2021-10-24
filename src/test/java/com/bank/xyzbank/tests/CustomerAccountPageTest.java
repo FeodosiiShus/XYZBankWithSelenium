@@ -14,8 +14,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 
-import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -50,12 +48,15 @@ public class CustomerAccountPageTest {
         assertEquals(customerAccountPage.getAccountNumber(), accountNumber);
     }
 
-    @Test
-    public void createDeposit() {
-        String balanceVal = customerAccountPage.currentBalanceValue();
-        customerAccountPage.createDeposit("100");
-        assertNotEquals(balanceVal, customerAccountPage.currentBalanceValue());
-        assertEquals("100", customerAccountPage.currentBalanceValue());
+    @ParameterizedTest
+    @ValueSource(strings = {"100", "2000"})
+    public void createDeposit(String depositValue) {
+        customerAccountPage.goToTransactionTab();
+        customerAccountPage.deleteAllTransactions();
+        customerAccountPage.goToCustomerTab();
+        customerAccountPage.createDeposit(depositValue);
+        assertEquals(depositValue, customerAccountPage.currentBalanceValue());
+        assertTrue(customerAccountPage.isDepositSuccessful());
     }
 
     @Test
