@@ -2,6 +2,7 @@ package com.bank.xyzbank.tests;
 
 import com.bank.xyzbank.factories.Browsers;
 import com.bank.xyzbank.factories.ConfigFactory;
+import com.bank.xyzbank.helpers.ImplicitlyWaitHelper;
 import com.bank.xyzbank.helpers.PageUrls;
 import com.bank.xyzbank.pages.CustomerAccountPage;
 import com.bank.xyzbank.pages.CustomerLoginPage;
@@ -33,7 +34,7 @@ public class CustomerAccountPageTest {
     public void initDriver() {
         driver = Browsers.CHROME_DOCKER.create();
         driver.get(urls.homePage());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ImplicitlyWaitHelper.waitPage(driver, 10);
         customerLoginPage = new CustomerLoginPage(driver);
         driver.get(urls.customerLoginPage());
         customerLoginPage.chooseLoginNameAndLogin("Harry Potter");

@@ -17,11 +17,6 @@ public class WaitHelper extends BaseHelper {
         super(driver);
     }
 
-    public void waitOpenPage(long timeout) {
-        logger.info("* Start implicitly wait *");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
-    }
-
     public WebElement waitElementClickable(WebElement element, long timeout) {
         logger.info("* Wait element to be clickable *");
         return new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.elementToBeClickable(element));
